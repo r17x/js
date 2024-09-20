@@ -752,6 +752,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@r17x/biome@workspace:packages/biome":
+  version: 0.0.0-use.local
+  resolution: "@r17x/biome@workspace:packages/biome"
+  languageName: unknown
+  linkType: soft
+
 "@r17x/semantic-release@workspace:packages/semantic-release":
   version: 0.0.0-use.local
   resolution: "@r17x/semantic-release@workspace:packages/semantic-release"
