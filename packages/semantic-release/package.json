@@ -1,7 +1,7 @@
 {
   "name": "@r17x/semantic-release",
   "description": "semantic-release configuration",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/r17x/js/tree/main/packages/semantic-release",
   "repository": {
     "type": "git",
