@@ -1,1 +1,3 @@
-yarn test
+#!/bin/sh
+
+yarn lint-staged
