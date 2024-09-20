@@ -1,34 +1,32 @@
 {
-  "name": "@r17x/semantic-release",
-  "description": "semantic-release configuration",
-  "version": "1.0.0",
-  "homepage": "https://github.com/r17x/js/tree/main/packages/semantic-release",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/r17x/js.git",
-    "directory": "packages/semantic-release"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "files": [
-    "index.json"
-  ],
-  "exports": {
-    ".": {
-      "require": "./index.json",
-      "import": "./index.json"
-    }
-  },
-  "dependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.0",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.3.4",
-    "@semantic-release/npm": "^12.0.1",
-    "@semantic-release/release-notes-generator": "^14.0.1",
-    "conventional-changelog-conventionalcommits": "^8.0.0"
-  }
+	"name": "@r17x/semantic-release",
+	"description": "semantic-release configuration",
+	"version": "1.0.0",
+	"homepage": "https://github.com/r17x/js/tree/main/packages/semantic-release",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/r17x/js.git",
+		"directory": "packages/semantic-release"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"files": ["index.json"],
+	"exports": {
+		".": {
+			"require": "./index.json",
+			"import": "./index.json"
+		}
+	},
+	"dependencies": {
+		"@semantic-release/changelog": "^6.0.3",
+		"@semantic-release/commit-analyzer": "^13.0.0",
+		"@semantic-release/exec": "^6.0.3",
+		"@semantic-release/git": "^10.0.1",
+		"@semantic-release/github": "^10.3.4",
+		"@semantic-release/npm": "^12.0.1",
+		"@semantic-release/release-notes-generator": "^14.0.1",
+		"conventional-changelog-conventionalcommits": "^8.0.0"
+	}
 }
