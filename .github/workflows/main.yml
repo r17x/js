@@ -55,7 +55,13 @@ jobs:
 
       - name: Print dependencies versions
         run: |
-          for i in "node" "yarn" "git" "yarn commitlint"
+          for i in \
+            "node" "yarn" "git"\
+            "yarn commitlint"\
+            "yarn vitest"\
+            "yarn biome"\
+            "yarn semantic-release"\
+            "yarn multi-semantic-release"
           do
             echo "$i version: $($i --version)"
           done
@@ -75,7 +81,7 @@ jobs:
         run: yarn build
 
       - name: test
-        run: yarn test
+        run: yarn test --coverage
 
       - name: release
         run: yarn release

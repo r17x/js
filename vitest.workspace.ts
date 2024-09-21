@@ -5,8 +5,8 @@ const config = defineConfig({
 		passWithNoTests: true,
 		globals: true,
 		coverage: {
+			all: true,
 			provider: "v8",
-			enabled: process.env.CI === "true",
 			reporter: ["lcov", "html"],
 		},
 	},
