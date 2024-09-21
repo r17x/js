@@ -13,6 +13,7 @@
 		"test": "vitest",
 		"build": "echo \"No build script specified\"",
 		"lint": "run-s \"lint:*\"",
+		"lint:biome": "biome ci .",
 		"lint:test": "echo \"No lint:test script specified\""
 	},
 	"lint-staged": {
