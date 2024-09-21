@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+##############################################################################################################################################################
+#
+# generate types from schema.json
+# output to src/types/rescript-<VERSION>.d.ts
+# and re-export from src/types/index.ts
+
+# var versions and schemas are data-set for schema list version and schema url
+#
+# Adding new version
+# ------------------
+#
+# 1. add new version to versions array
+# 2. add new schema url to schemas array - see release page for schema url (e.g. https://github.com/rescript-lang/rescript-compiler/releases/tag/v11.0.0-rc.3)
+# 3. run this script
+#
+##############################################################################################################################################################
+
+versions=(v11 v10)
+
+schemas=(
+  [v11]="https://raw.githubusercontent.com/rescript-lang/rescript-compiler/29644ec16e54a05f6e72047e33f068d232899aec/docs/docson/build-schema.json"
+  [v10]="https://raw.githubusercontent.com/rescript-lang/rescript-compiler/3ac19a5a6911cb7f09b15caa26dafe820822915a/docs/docson/build-schema.json"
+)
+
+for version in "${versions[@]}"; do
+  schema_url="${schemas[$version]}" 
+  schema_out="/tmp/rescript-${version}.json"
+  schema_ts="rescript-${version}.d.ts"
+  ts_dir="src/types"
+
+  mkdir -p "${ts_dir}"
+
+  if [ ! -f "${schema_out}" ]; then
+    curl -L "${schema_url}" -o "${schema_out}"
+  fi
+
+  if [ ! -f "${ts_dir}/${schema_ts}" ]; then
+   pnpm --package=json-schema-to-typescript dlx json2ts "${schema_out}" > "${ts_dir}/${schema_ts}"
+  fi
+done
