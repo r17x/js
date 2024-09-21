@@ -1,5 +1,6 @@
 {
 	"name": "js",
+	"private": true,
 	"engines": {
 		"node": ">=20"
 	},
@@ -11,7 +12,7 @@
 		"prepare": "husky",
 		"release": "yarn exec multi-semantic-release",
 		"test": "vitest",
-		"build": "echo \"No build script specified\"",
+		"build": "yarn workspaces foreach -Rpt --since --no-private run build",
 		"lint": "run-s \"lint:*\"",
 		"lint:biome": "biome ci .",
 		"lint:test": "echo \"No lint:test script specified\""
