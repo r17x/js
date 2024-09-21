@@ -1,6 +1,7 @@
 name: Main Pipeline
 
 on:
+  pull_request:
   push:
     branches: [main, beta]
 
@@ -27,6 +28,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -50,6 +53,19 @@ jobs:
       - name: install dependencies
         run: yarn install --immutable
 
+      - name: Print dependencies versions
+        run: |
+          for i in \
+            "node" "yarn" "git"\
+            "yarn commitlint"\
+            "yarn vitest"\
+            "yarn biome"\
+            "yarn semantic-release"\
+            "yarn multi-semantic-release"
+          do
+            echo "$i version: $($i --version)"
+          done
+
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
         run: yarn commitlint --last --verbose
@@ -65,7 +81,7 @@ jobs:
         run: yarn build
 
       - name: test
-        run: yarn test
+        run: yarn test --coverage
 
       - name: release
         run: yarn release
