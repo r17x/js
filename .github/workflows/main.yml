@@ -1,6 +1,7 @@
 name: Main Pipeline
 
 on:
+  pull_request:
   push:
     branches: [main, beta]
 
