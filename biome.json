@@ -1,1 +1,18 @@
-{ "extends": ["@r17x/biome"] }
+{
+	"extends": ["@r17x/biome"],
+	"overrides": [
+		{
+			"include": ["packages/unplugin-rescript/**"],
+			"linter": {
+				"rules": {
+					"complexity": {
+						"noForEach": "off"
+					},
+					"style": {
+						"useNodejsImportProtocol": "off"
+					}
+				}
+			}
+		}
+	]
+}
