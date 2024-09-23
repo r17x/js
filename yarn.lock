@@ -1716,8 +1716,8 @@ __metadata:
   linkType: soft
 
 "@rollup/pluginutils@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@rollup/pluginutils@npm:5.1.0"
+  version: 5.1.1
+  resolution: "@rollup/pluginutils@npm:5.1.1"
   dependencies:
     "@types/estree": "npm:^1.0.0"
     estree-walker: "npm:^2.0.2"
@@ -1727,7 +1727,7 @@ __metadata:
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: 10c0/c7bed15711f942d6fdd3470fef4105b73991f99a478605e13d41888963330a6f9e32be37e6ddb13f012bc7673ff5e54f06f59fd47109436c1c513986a8a7612d
+  checksum: 10c0/433a8b0b67ef9a36fb909a63c5ffa03846e15b6547fec9d2b9e15510dd898de9d1ec3f574aae29749d0e757e269112121a859f204b37becc470f1404e862b1e2
   languageName: node
   linkType: hard
 
