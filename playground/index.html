@@ -11,13 +11,12 @@
   <!-- [Tested in Vite] src/index.res will be compiled to src/index.res.js -->
   <script type="module"> 
     import "./src/index.res"
-    // import {env} from '@env'
-    // Object.entries(env).forEach(([key, value]) => {
-    //   console.log({
-    //     key, value
-    //   })
-    // })
-    // console.log({env}) // Okay Cool 😈🫵
+    import {env} from '@env'
+    Object.entries(env).forEach(([key, value]) => {
+      console.log({
+        key, value
+      })
+    })
   </script> 
 </body>
 </html>
