@@ -1,38 +1,33 @@
-import type { Match, OptionWithSchema, Options } from "@/types";
+import type { Options, PluginOption } from "@/types";
 import { A, D, F, G, S, pipe } from "@mobily/ts-belt";
-import { P, match } from "ts-pattern";
-import type { ZodRawShape } from "zod";
 import { z } from "zod";
-import { zodToTs } from "zod-to-ts";
-import { printTypeDefinition } from "./ast";
+import { SyntaxKind, printTypeDefinition, zodToTs } from "./ast";
 
 const exclaim = S.startsWith("!");
 const dropHead = S.sliceToEnd(1);
 
-const optionWithSchema = z.strictObject({
-	match: z.union([z.string(), z.string().array()]),
-	schema: z.union([z.instanceof(z.ZodType), z.record(z.any())]),
-	moduleEnvName: z.string().optional().default("@env"),
-});
+const matchSchema = z.string().min(1).or(z.string().min(1).array());
 
-const PoptionWithSchema = P.when(
-	(a): a is OptionWithSchema => optionWithSchema.safeParse(a).success,
-);
+const option = matchSchema
+	.transform((match) => ({
+		match,
+		schema: z.any(),
+		moduleEnvName: "@env",
+	}))
+	.or(
+		z.strictObject({
+			match: matchSchema,
+			schema: z
+				.record(z.any())
+				.transform((a) => z.object(a))
+				.or(z.instanceof(z.ZodType)),
+			moduleEnvName: z.string().optional().default("@env"),
+		}),
+	);
 
-export const getOptions = (o: Options): OptionWithSchema =>
-	match(o)
-		.with(P.union(P.string, P.array(P.string)), (m) => ({
-			match: m,
-			schema: z.any(),
-			moduleEnvName: "@env",
-		}))
-		.with(PoptionWithSchema, (a) => ({
-			...a,
-			moduleEnvName: a.moduleEnvName || "@env",
-		}))
-		.exhaustive();
+export const getOptions = (o: PluginOption): Options => option.parse(o);
 
-const filterEnv = (env: Record<string, string>, m: Match) => {
+const filterEnv = (env: Record<string, string>, m: Options["match"]) => {
 	const ms = G.isString(m) ? [m] : m;
 	const white = pipe(ms, A.filter(G.isNot(exclaim)));
 	const black = pipe(ms, A.filter(exclaim), A.map(dropHead));
@@ -41,56 +36,50 @@ const filterEnv = (env: Record<string, string>, m: Match) => {
 	return pipe(env, D.filterWithKey(selector), D.deleteKeys(black));
 };
 
-export const getEnv = (
-	env: Record<string, string>,
-	options: OptionWithSchema,
-) => filterEnv(env, options.match);
+export const getEnv = (env: Record<string, string>, options: Options) =>
+	filterEnv(env, options.match);
 
-// TODO: need to improve for deep values in object
-const isZodRawShape = P.when(
-	(a): a is ZodRawShape =>
-		G.isObject(a) &&
-		Object.values(a).every((b) => z.instanceof(z.ZodType).parse(b)),
-);
-
-export const getTsNodeType = (options: OptionWithSchema) =>
-	match(options.schema)
-		.with(P.instanceOf(z.ZodType), (schema) =>
-			match(zodToTs(schema).node)
-				.with({ kind: 133 }, () => zodToTs(z.record(z.any(), z.any())).node)
-				.otherwise(() => zodToTs(schema).node),
-		)
-		.with(isZodRawShape, (schema) => zodToTs(z.object(schema)).node)
-		.exhaustive();
+export const getTsNodeType = (options: Options) =>
+	F.ifElse(
+		zodToTs(options.schema).node,
+		({ kind }) => kind === SyntaxKind.AnyKeyword,
+		() => zodToTs(z.record(z.any(), z.any())).node,
+		F.identity,
+	);
 
 const toUndefined = () => undefined;
 
 export const createModuleEnv = (
 	env: Record<string, string>,
-	options: OptionWithSchema,
+	options: Options,
 ) => ({
 	code: `export const env = ${JSON.stringify(getEnv(env, options))}`,
 });
 
-export const resolveId = (options: OptionWithSchema) =>
+// TODO: will be better to use `t.factory` from 'typescript'.
+export const createModuleDTS = (options: Options) => `declare module "${
+	options.moduleEnvName
+}" {
+  export const env: ${pipe(options, getTsNodeType, printTypeDefinition)}
+}`;
+
+export const resolveId = (options: Options) =>
 	F.ifElse(
 		(id: string) => id === options.moduleEnvName,
 		() => options.moduleEnvName,
 		toUndefined,
 	);
 
-export const load = (env: Record<string, string>, options: OptionWithSchema) =>
+export const load = (env: Record<string, string>, options: Options) =>
 	F.ifElse(
 		(id: string) => id === options.moduleEnvName,
 		() => Promise.resolve(createModuleEnv(env, options)),
 		toUndefined,
 	);
 
-// TODO: will be better to use `t.factory` from 'typescript'.
-export const createModuleDTS = (
-	options: OptionWithSchema,
-) => `declare module "${options.moduleEnvName}" {
-  export const env: ${pipe(options, getTsNodeType, printTypeDefinition)}
-}`;
+export const build = (env: Record<string, string>, options: Options) => {};
+// F.once(() => import("fs/promises"))()
+// .then(fs => [
+// ]).then(([a,b]) =>  )
 
 export { printTypeDefinition } from "./ast";

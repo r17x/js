@@ -1,8 +1,6 @@
 import type { ZodRawShape, ZodTypeAny } from "zod";
 
 export type Match = string | string[];
-type Option = Match;
-
 /**
  * @description Options with schema and will "strict" validate the env variable
  * @example
@@ -24,10 +22,19 @@ type Option = Match;
  * }
  * ```
  */
-export type OptionWithSchema = {
+export type Options = {
+	match: Match;
+	schema: ZodTypeAny;
+	moduleEnvName: string;
+};
+
+type BPluginOption = {
 	match: Match;
 	schema: ZodTypeAny | ZodRawShape;
+	/**
+	 * @default '@env'
+	 */
 	moduleEnvName?: string;
 };
 
-export type Options = Option | OptionWithSchema;
+export type PluginOption = Match | BPluginOption;
