@@ -83,7 +83,7 @@
 			"*": ["./dist/*", "./*"]
 		}
 	},
-	"files": ["dist"],
+	"files": ["dist", "types", "client.d.ts"],
 	"scripts": {
 		"prepublishOnly": "yarn build",
 		"build": "run-s \"build:*\"",
