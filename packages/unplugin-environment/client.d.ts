@@ -1,1 +1,1 @@
-/// <reference path="./types/env.d.ts" />
+/// <reference path="./dist/env.d.ts" />

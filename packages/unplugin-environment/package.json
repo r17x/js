@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-environment",
 	"type": "module",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "a plugin for loading enviroment variables safely.",
 	"license": "MIT",
 	"author": "r17x <hi@rin.rocks>",
@@ -83,14 +83,12 @@
 			"*": ["./dist/*", "./*"]
 		}
 	},
-	"files": ["dist", "types", "client.d.ts"],
+	"files": ["dist", "client.d.ts"],
 	"scripts": {
-		"prepublishOnly": "yarn build",
-		"build": "run-s \"build:*\"",
-		"build:main": "tsup",
+		"prepack": "yarn build",
+		"build": "tsup",
 		"build:fix": "esno scripts/postbuild.ts",
-		"dev": "tsup --watch src",
-		"start": "esno src/index.ts"
+		"dev": "tsup --watch src"
 	},
 	"peerDependencies": {
 		"@farmfe/core": ">=1",
@@ -124,6 +122,7 @@
 		"npm-run-path": "^5.3.0",
 		"picocolors": "^1.0.1",
 		"ts-pattern": "^5.3.1",
+		"typescript": "^5.3.2",
 		"unplugin": "1.10.1",
 		"zod": "^3.23.8",
 		"zod-to-ts": "^1.2.0"
@@ -139,7 +138,6 @@
 		"npm-run-all": "^4.1.5",
 		"rollup": "^4.6.1",
 		"tsup": "^8.0.1",
-		"typescript": "^5.3.2",
 		"vite": "^5.0.4",
 		"webpack": "^5.89.0"
 	}
