@@ -1,5 +1,5 @@
+import type { PluginOption } from "@/types";
 import { describe, expect, it } from "vitest";
-import type { ZodRawShape } from "zod";
 import { z } from "zod";
 import { zodToTs } from "zod-to-ts";
 import * as Core from "./core";
@@ -104,7 +104,7 @@ describe("uplugin-environment:core", () => {
 		});
 
 		expect(Core.getTsNodeType(options)).toStrictEqual(
-			zodToTs(z.object(options.schema as ZodRawShape)).node,
+			zodToTs(options.schema).node,
 		);
 
 		expect(
@@ -115,6 +115,7 @@ describe("uplugin-environment:core", () => {
 						REACT_APP_NAME: z.string(),
 					})
 					.strict(),
+				moduleEnvName: "@env",
 			}),
 		).toStrictEqual(
 			zodToTs(
@@ -156,6 +157,10 @@ describe("uplugin-environment:core", () => {
 	});
 
 	it("valid options value", () => {
+		expect(() => Core.getOptions("")).toThrowError();
+		expect(() => Core.getOptions({} as PluginOption)).toThrowError();
+		expect(() => Core.getOptions({ match: "" } as PluginOption)).toThrowError();
+
 		expect(Core.getOptions("REACT_APP")).toStrictEqual({
 			match: "REACT_APP",
 			schema: expect.any(z.ZodType),

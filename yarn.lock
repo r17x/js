@@ -12488,13 +12488,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-pattern@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "ts-pattern@npm:5.3.1"
-  checksum: 10c0/4d5082edb2d0a198a4f46abc834317fa2be616277be7721df71a93ea33180b85443ae2e92ff28a0cda51f038b5e347b35ad79936a55ed468e23268fbc48503a1
-  languageName: node
-  linkType: hard
-
 "tsconfck@npm:^3.1.3":
   version: 3.1.3
   resolution: "tsconfck@npm:3.1.3"
@@ -12964,7 +12957,6 @@ __metadata:
     npm-run-path: "npm:^5.3.0"
     picocolors: "npm:^1.0.1"
     rollup: "npm:^4.6.1"
-    ts-pattern: "npm:^5.3.1"
     tsup: "npm:^8.0.1"
     typescript: "npm:^5.3.2"
     unplugin: "npm:1.10.1"

@@ -1,10 +1,13 @@
 import colors from "picocolors";
 
-export function log({
-	kind,
-	message,
-	prefix: p,
-}: { kind: "error" | "info"; message: string; prefix?: string }) {
+export function log(
+	{
+		kind,
+		message,
+		prefix: p,
+	}: { kind: "error" | "info"; message: string; prefix?: string },
+	...args: unknown[]
+) {
 	const timeFormatter = new Intl.DateTimeFormat(undefined, {
 		hour: "numeric",
 		minute: "numeric",
@@ -26,4 +29,7 @@ export function log({
 				? console[kind](prefix, colors.bold(line))
 				: console[kind](prefix, line);
 	});
+	if (args.length > 0) {
+		console.log("\n", JSON.stringify(args, null, 2), "\n");
+	}
 }
