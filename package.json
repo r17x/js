@@ -4,11 +4,12 @@
 	"engines": {
 		"node": ">=20"
 	},
-	"workspaces": ["packages/*"],
+	"workspaces": ["packages/*", "playground"],
 	"author": "r17x <hi@rin.rocks>",
 	"license": "MIT",
 	"packageManager": "yarn@4.5.0",
 	"scripts": {
+		"playground": "cd playground && yarn vite",
 		"prepare": "husky",
 		"release": "yarn exec multi-semantic-release",
 		"test": "vitest",
