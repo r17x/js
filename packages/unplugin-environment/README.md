@@ -30,6 +30,11 @@ bun add unplugin-environment
 
 > Example: [`playground/`](./playground/)
 
+### Prerequisites
+
+* (optional) TypeScript 🟦
+    * you need to define `"types": ["unplugin-environment/client"]` in your `tsconfig.json` for type suggestions. The type suggestions based on the schema you provide in `unplugin-environment` options.
+
 <details>
 <summary>Vite</summary><br>
 
@@ -39,7 +44,7 @@ import Environment from 'unplugin-environment/vite'
 
 export default defineConfig({
   plugins: [
-    Environment(),
+    Environment("PREFIX_APP"),
   ],
 })
 ```
@@ -54,7 +59,7 @@ import Environment from 'unplugin-environment/farm'
 
 export default defineconfig({
   plugins: [
-    Environment(),
+    Environment("PREFIX_APP"),
   ],
 })
 ```
@@ -84,7 +89,7 @@ import Environment from 'unplugin-environment/rollup'
 
 export default {
   plugins: [
-    Environment(),
+    Environment("PREFIX_APP"),
   ],
 }
 ```
@@ -116,7 +121,7 @@ import { build } from 'esbuild'
 import Environment from 'unplugin-environment/esbuild'
 
 build({
-  plugins: [Environment()],
+  plugins: [Environment("PREFIX_APP")],
 })
 ```
 
@@ -131,7 +136,7 @@ import { defineConfig } from 'astro/config'
 import Environment from 'unplugin-environment/astro'
 
 build({
-  plugins: [Environment()],
+  plugins: [Environment("PREFIX_APP")],
 })
 ```
 
