@@ -2,7 +2,7 @@
 	"extends": ["@r17x/biome"],
 	"overrides": [
 		{
-			"include": ["packages/unplugin-rescript/**"],
+			"include": ["packages/unplugin-*/**"],
 			"linter": {
 				"rules": {
 					"complexity": {
