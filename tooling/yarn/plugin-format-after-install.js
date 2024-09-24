@@ -9,11 +9,12 @@ module.exports = {
 						(pkg) => pkg.name === "biome" && pkg.scope === "biomejs",
 					);
 					if (biome) {
+						const root = project.workspaces[0];
 						const packageJsons = project.workspaces
 							.map((myProject) => `${myProject.cwd}/package.json`)
 							.join(" ");
 						process.exitCode = await execute(
-							`yarn biome check --write ${packageJsons}`,
+							`yarn --cwd ${root.cwd} biome check --write ${packageJsons}`,
 						);
 					}
 				},
