@@ -1,25 +1,33 @@
-type Match = string | string[];
+import type { ZodRawShape, ZodTypeAny } from "zod";
+
+export type Match = string | string[];
 type Option = Match;
-type OptionWithSchema = {
-	match: Match;
-	schema: unknown;
-};
 
 /**
- * Environment option
+ * @description Options with schema and will "strict" validate the env variable
  * @example
  * ```ts
- * const withOptionSimple = Environment('REACT_APP_*') // we assume that prefix is REACT_APP.
- * const withOptionSimples = Environment(['REACT_APP_*', 'NEXT_PUBLIC_*', 'VITE_APP_*', 'PUBLIC_*']) // many prefixes matcher.
- * const withOptionStrict = Environment({
+ * const optionWithSchema = {
  *   match: 'REACT_APP',
- *   // add schema to validate environment variable
- *   // it will throw error if the environment variable is not valid at build time.
- *   schema: z.shape({
- *     REACT_APP_API_URL: z.string(),
- *     REACT_APP_API_TOKEN: z.string(),
- *   })
- * })
+ *   schema: { APP_NAME: z.string() }
+ *   //  moduleEnvName: will be '@env' for accessing env
+ *   //  import {env} from '@env'
+ *   //  env.APP_NAME
+ * }
+ *
+ * const optionWithSchemaAndModuleEnvName = {
+ *   match: 'REACT_APP',
+ *   schema: { APP_NAME: z.string() },
+ *   moduleEnvName: '@myenv'
+ *   //  import { env } from '@myenv'
+ *   //  env.APP_NAME
+ * }
  * ```
  */
+export type OptionWithSchema = {
+	match: Match;
+	schema: ZodTypeAny | ZodRawShape;
+	moduleEnvName?: string;
+};
+
 export type Options = Option | OptionWithSchema;

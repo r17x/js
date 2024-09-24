@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`uplugin-environment:core > only for knowledge 1`] = `
+"{
+    [x: string]: string;
+}"
+`;
+
+exports[`uplugin-environment:core > only for knowledge 2`] = `
+"{
+    REACT_APP_NAME: string;
+    REACT_APP_VERSION: string;
+    REACT_APP_AGE: number;
+}"
+`;
+
+exports[`uplugin-environment:core > valid create module declaration 1`] = `
+"declare module "@myenv" {
+  export const env: {
+    REACT_APP_NAME: string;
+    REACT_APP_VERSION: string;
+    REACT_APP_AGE: number;
+}
+}"
+`;
+
+exports[`uplugin-environment:core > valid create module env 1`] = `
+{
+  "code": "export const env = {"REACT_APP_NAME":"htmx_BTW","REACT_APP_VERSION":"6.6.6"}",
+}
+`;
+
+exports[`uplugin-environment:core > valid create module env 2`] = `
+{
+  "code": "export const env = {"REACT_APP_NAME":"htmx_BTW","REACT_APP_VERSION":"6.6.6"}",
+}
+`;
+
+exports[`uplugin-environment:core > valid create module env 3`] = `
+{
+  "code": "export const env = {"REACT_APP_NAME":"htmx_BTW","REACT_APP_VERSION":"6.6.6"}",
+}
+`;
