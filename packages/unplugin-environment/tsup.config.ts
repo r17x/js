@@ -7,4 +7,5 @@ export default (<Options>{
 	dts: true,
 	cjsInterop: true,
 	splitting: true,
+	onSuccess: "yarn run build:fix",
 });
