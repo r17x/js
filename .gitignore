@@ -136,3 +136,5 @@ dist
 
 **/lib/bs/**
 **/*.res.js
+
+**/env.d.ts
