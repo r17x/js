@@ -82,9 +82,8 @@
 	},
 	"files": ["dist"],
 	"scripts": {
-		"prepublishOnly": "yarn build",
-		"build": "run-s \"build:*\"",
-		"build:main": "tsup",
+		"prepack": "npm run build",
+		"build": "tsup",
 		"build:fix": "esno scripts/postbuild.ts",
 		"dev": "tsup --watch src",
 		"start": "esno src/index.ts"
