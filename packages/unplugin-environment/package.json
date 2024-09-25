@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-environment",
 	"type": "module",
-	"version": "0.0.4",
+	"version": "1.0.0",
 	"description": "a plugin for loading enviroment variables safely.",
 	"license": "MIT",
 	"author": "r17x <hi@rin.rocks>",
@@ -80,10 +80,16 @@
 	"types": "dist/index.d.ts",
 	"typesVersions": {
 		"*": {
-			"*": ["./dist/*", "./*"]
+			"*": [
+				"./dist/*",
+				"./*"
+			]
 		}
 	},
-	"files": ["dist", "client.d.ts"],
+	"files": [
+		"dist",
+		"client.d.ts"
+	],
 	"scripts": {
 		"prepack": "yarn build",
 		"build": "tsup",
