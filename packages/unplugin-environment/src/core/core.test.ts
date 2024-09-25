@@ -1,10 +1,35 @@
 import type { PluginOption } from "@/types";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { zodToTs } from "zod-to-ts";
 import * as Core from "./core";
 
 describe("uplugin-environment:core", () => {
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
+
+	it("valid run build", () => {
+		expect(
+			Core.build({ REACT_APP_NAME: "htmx_BTW" }, Core.getOptions("REACT_APP")),
+		).resolves.toStrictEqual({
+			success: true,
+			data: {
+				REACT_APP_NAME: "htmx_BTW",
+			},
+		});
+	});
+
+	it("only run watchChange once when valid watchList", () => {
+		const onChange = vi.fn();
+		const watcher = Core.watchChange([".env"], onChange);
+		watcher("/a/b/c/.env~~~~");
+		watcher("/a/b/c/any");
+		watcher("/a/b/c/any");
+		watcher("/a/b/c/any");
+		expect(onChange).toHaveBeenCalledTimes(1);
+	});
+
 	it("only for knowledge", () => {
 		expect(
 			Core.printTypeDefinition(
@@ -130,6 +155,7 @@ describe("uplugin-environment:core", () => {
 
 	it("valid parse env", () => {
 		const mockEnv = {
+			REACT_APP_PORT: "8080",
 			REACT_APP_NAME: "htmx_BTW",
 			REACT_APP_VERSION: "6.6.6",
 			SECRET_KEY_TOKEN_: "1234567890",
@@ -138,6 +164,7 @@ describe("uplugin-environment:core", () => {
 		expect(Core.getEnv(mockEnv, Core.getOptions("REACT_APP"))).toStrictEqual({
 			REACT_APP_NAME: "htmx_BTW",
 			REACT_APP_VERSION: "6.6.6",
+			REACT_APP_PORT: "8080",
 		});
 
 		expect(
@@ -145,7 +172,30 @@ describe("uplugin-environment:core", () => {
 				mockEnv,
 				Core.getOptions(["REACT_APP", "!REACT_APP_VERSION"]),
 			),
-		).toStrictEqual({ REACT_APP_NAME: "htmx_BTW" });
+		).toStrictEqual({
+			REACT_APP_NAME: "htmx_BTW",
+			REACT_APP_PORT: "8080",
+		});
+
+		expect(
+			Core.getEnv(
+				mockEnv,
+				Core.getOptions({
+					match: ["REACT_APP", "!REACT_APP_VERSION"],
+					schema: z.object({
+						REACT_APP_NAME: z.string(),
+						REACT_APP_PORT: z
+							.string()
+							.min(1)
+							.transform((a) => a | 0)
+							.pipe(z.number()),
+					}),
+				}),
+			),
+		).toStrictEqual({
+			REACT_APP_NAME: "htmx_BTW",
+			REACT_APP_PORT: 8080,
+		});
 	});
 
 	it("valid resolveId", () => {

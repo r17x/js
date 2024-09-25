@@ -1,3 +1,4 @@
+import path from "path";
 import type { Options, PluginOption } from "@/types";
 import { A, D, F, G, S, pipe } from "@mobily/ts-belt";
 import { z } from "zod";
@@ -89,7 +90,7 @@ export const watchChange = (
 	onChange: (id: string) => void,
 ) =>
 	F.ifElse(
-		(id: string) => A.some(watchList, S.includes(id)),
+		(id: string) => A.some(watchList, (x) => S.includes(path.basename(id), x)),
 		onChange,
 		toUndefined,
 	);
