@@ -1,7 +1,7 @@
 <div align="center">
     <h1>unplugin-environment</h1>
     <p>
-        a plugin for loading enviroment variables simple and safely.
+        A plugin for loading enviroment variables simple and safely.
     </p>
     <p>
         <a href="https://www.npmjs.com/package/unplugin-environment"><img src="https://img.shields.io/npm/v/unplugin-environment.svg?style=flat-square" alt="npm package"></a>
