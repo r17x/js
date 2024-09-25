@@ -84,13 +84,13 @@ export const load = (env: Record<string, string>, options: Options) =>
 		toUndefined,
 	);
 
-export const watchChange = (watchList: string[], onChange: () => void) =>
+export const watchChange = (
+	watchList: string[],
+	onChange: (id: string) => void,
+) =>
 	F.ifElse(
 		(id: string) => A.some(watchList, S.includes(id)),
-		(id) => {
-			console.log({ id });
-			onChange();
-		},
+		onChange,
 		toUndefined,
 	);
 

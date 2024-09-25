@@ -52,7 +52,6 @@ export const unpluginFactory: UnpluginFactory<PluginOption> = (o) => {
 		resolveId: Core.resolveId(options),
 		load: Core.load(env, options),
 		watchChange: Core.watchChange([".env"], () => {
-			console.log("x");
 			dotenvConfig({ processEnv: env });
 		}),
 		buildStart: () => Core.build(env, options).then(writer).catch(logError),
