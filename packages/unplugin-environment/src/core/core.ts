@@ -3,27 +3,28 @@ import { A, D, F, G, S, pipe } from "@mobily/ts-belt";
 import { z } from "zod";
 import { SyntaxKind, printTypeDefinition, zodToTs } from "./ast";
 
+const toUndefined = () => undefined;
 const exclaim = S.startsWith("!");
 const dropHead = S.sliceToEnd(1);
 
 const matchSchema = z.string().min(1).or(z.string().min(1).array());
 
-const option = matchSchema
-	.transform((match) => ({
-		match,
-		schema: z.any(),
-		moduleEnvName: "@env",
-	}))
-	.or(
-		z.strictObject({
-			match: matchSchema,
-			schema: z
-				.record(z.any())
-				.transform((a) => z.object(a))
-				.or(z.instanceof(z.ZodType)),
-			moduleEnvName: z.string().optional().default("@env"),
-		}),
-	);
+const defaultOption = (match: Options["match"]) => ({
+	match,
+	schema: z.any(),
+	moduleEnvName: "@env",
+});
+
+const strictOption = z.strictObject({
+	match: matchSchema,
+	schema: z
+		.record(z.instanceof(z.ZodType))
+		.transform((a) => z.object(a))
+		.or(z.instanceof(z.ZodType)),
+	moduleEnvName: z.string().optional().default("@env"),
+});
+
+const option = matchSchema.transform(defaultOption).or(strictOption);
 
 export const getOptions = (o: PluginOption): Options => option.parse(o);
 
@@ -36,8 +37,16 @@ const filterEnv = (env: Record<string, string>, m: Options["match"]) => {
 	return pipe(env, D.filterWithKey(selector), D.deleteKeys(black));
 };
 
-export const getEnv = (env: Record<string, string>, options: Options) =>
-	filterEnv(env, options.match);
+export const getEnv = (env: Record<string, string>, options: Options) => {
+	const filteredEnv = filterEnv(env, options.match);
+	const parsedEnv = options.schema.safeParse(filteredEnv);
+	return F.ifElse(
+		parsedEnv,
+		({ success }) => success,
+		({ data }) => D.merge(filteredEnv, data),
+		() => filteredEnv,
+	);
+};
 
 export const getTsNodeType = (options: Options) =>
 	F.ifElse(
@@ -46,8 +55,6 @@ export const getTsNodeType = (options: Options) =>
 		() => zodToTs(z.record(z.any(), z.any())).node,
 		F.identity,
 	);
-
-const toUndefined = () => undefined;
 
 export const createModuleEnv = (
 	env: Record<string, string>,
@@ -77,9 +84,23 @@ export const load = (env: Record<string, string>, options: Options) =>
 		toUndefined,
 	);
 
-export const build = (env: Record<string, string>, options: Options) => {};
-// F.once(() => import("fs/promises"))()
-// .then(fs => [
-// ]).then(([a,b]) =>  )
+export const watchChange = (watchList: string[], onChange: () => void) =>
+	F.ifElse(
+		(id: string) => A.some(watchList, S.includes(id)),
+		(id) => {
+			console.log({ id });
+			onChange();
+		},
+		toUndefined,
+	);
+
+export const build = (env: Record<string, string>, options: Options) =>
+	options.schema.safeParseAsync(env).then(
+		F.ifElse(
+			({ success }) => success,
+			(a) => Promise.resolve(a),
+			(e) => Promise.reject(e?.error),
+		),
+	);
 
 export { printTypeDefinition } from "./ast";
