@@ -1,15 +1,17 @@
 import { promises as fs } from "node:fs";
-import { basename, dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { basename, resolve } from "node:path";
 import chalk from "chalk";
 import fg from "fast-glob";
 
 async function run() {
+	const cwd = resolve(process.cwd(), "dist");
+	console.log(chalk.cyan.inverse(" CWD: "), ` ${cwd}`);
+
 	// fix cjs exports
 	const files = await fg("*.cjs", {
 		ignore: ["chunk-*"],
 		absolute: true,
-		cwd: resolve(dirname(fileURLToPath(import.meta.url)), "../dist"),
+		cwd,
 	});
 	for (const file of files) {
 		console.log(chalk.cyan.inverse(" POST "), `Fix ${basename(file)}`);

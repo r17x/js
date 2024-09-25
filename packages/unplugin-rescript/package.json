@@ -84,9 +84,8 @@
 	"scripts": {
 		"prepack": "npm run build",
 		"build": "tsup",
-		"build:fix": "esno scripts/postbuild.ts",
-		"dev": "tsup --watch src",
-		"start": "esno src/index.ts"
+		"build:fix": "esno ../../tooling/unplugin/postbuild.ts",
+		"dev": "tsup --watch src"
 	},
 	"peerDependencies": {
 		"@farmfe/core": ">=1",
