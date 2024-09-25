@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-environment",
 	"type": "module",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "a plugin for loading enviroment variables safely.",
 	"license": "MIT",
 	"author": "r17x <hi@rin.rocks>",
