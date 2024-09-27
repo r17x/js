@@ -50,14 +50,6 @@ export const getEnv = (env: Record<string, string>, options: Options) => {
 	);
 };
 
-export const getTsNodeType = (options: Options) =>
-	F.ifElse(
-		zodToTs(options.schema).node,
-		({ kind }) => kind === SyntaxKind.AnyKeyword,
-		() => zodToTs(z.record(z.any(), z.any())).node,
-		F.identity,
-	);
-
 export const createModuleEnv = (
 	env: Record<string, string>,
 	options: Options,

@@ -6,8 +6,7 @@ export default function (options: PluginOption): AstroIntegration {
 	return {
 		name: "unplugin-environment",
 		hooks: {
-			// biome-ignore lint/suspicious/noExplicitAny: expected
-			"astro:config:setup": async (astro: any) => {
+			"astro:config:setup": async (astro) => {
 				astro.config.vite.plugins ||= [];
 				astro.config.vite.plugins.push(Environment(options));
 			},

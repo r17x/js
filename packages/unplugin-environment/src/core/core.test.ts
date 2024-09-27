@@ -68,13 +68,14 @@ describe("uplugin-environment:core", () => {
 		).toMatchSnapshot();
 	});
 
-	it("valid create module declaration", () => {
+	it("[DTS] valid create module type definition", () => {
 		const options = Core.getOptions({
 			match: "REACT_APP",
 			schema: {
 				REACT_APP_NAME: z.string(),
 				REACT_APP_VERSION: z.string(),
 				REACT_APP_AGE: z.number(),
+				REACT_APP_PORT: z.coerce.number().min(1),
 			},
 			moduleEnvName: "@myenv",
 		});
@@ -165,39 +166,6 @@ describe("uplugin-environment:core", () => {
 			`{
     REACT_APP_NAME: string;
 }`,
-		);
-	});
-	it("parse type definition", () => {
-		const options = Core.getOptions({
-			match: "REACT_APP",
-			schema: {
-				REACT_APP_NAME: z.string(),
-				REACT_APP_VERSION: z.string(),
-			},
-		});
-
-		expect(Core.getTsNodeType(options)).toStrictEqual(
-			zodToTs(options.schema).node,
-		);
-
-		expect(
-			Core.getTsNodeType({
-				match: "REACT_APP",
-				schema: z
-					.object({
-						REACT_APP_NAME: z.string(),
-					})
-					.strict(),
-				moduleEnvName: "@env",
-			}),
-		).toStrictEqual(
-			zodToTs(
-				z
-					.object({
-						REACT_APP_NAME: z.string(),
-					})
-					.strict(),
-			).node,
 		);
 	});
 
