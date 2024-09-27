@@ -1,8 +1,5 @@
 {
 	"compilerOptions": {
-		"paths": {
-			"@/*": ["./src/*"]
-		},
 		"target": "es2020",
 		"lib": ["esnext", "DOM"],
 		"module": "esnext",

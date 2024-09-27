@@ -1,8 +1,8 @@
 import path from "path";
-import type { Options, PluginOption } from "@/types";
 import { A, D, F, G, S, pipe } from "@mobily/ts-belt";
 import { z } from "zod";
 import { SyntaxKind, printTypeDefinition, zodToTs } from "./ast";
+import type { Options, PluginOption } from "./types";
 
 const toUndefined = () => undefined;
 const exclaim = S.startsWith("!");

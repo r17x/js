@@ -1,8 +1,8 @@
 import type { AstroIntegration } from "astro";
-import type { Options } from "./types";
+import type { PluginOption } from "./core/types";
 import Environment from "./vite";
 
-export default function (options: Options): AstroIntegration {
+export default function (options: PluginOption): AstroIntegration {
 	return {
 		name: "unplugin-environment",
 		hooks: {

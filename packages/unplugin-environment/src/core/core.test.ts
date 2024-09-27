@@ -1,8 +1,8 @@
-import type { PluginOption } from "@/types";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { zodToTs } from "zod-to-ts";
 import * as Core from "./core";
+import type { PluginOption } from "./types";
 
 describe("uplugin-environment:core", () => {
 	beforeEach(() => {

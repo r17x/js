@@ -1,10 +1,10 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import type { PluginOption } from "@/types";
 import { config as dotenvConfig } from "dotenv";
 import type { UnpluginFactory } from "unplugin";
 import * as Core from "./core";
 import { log } from "./logger";
+import type { PluginOption } from "./types";
 
 const withBanner = (a: string) =>
 	[
