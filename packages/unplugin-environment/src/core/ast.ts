@@ -12,5 +12,4 @@ const emptySourceFile = ts.createSourceFile("", "", ts.ScriptTarget.Latest);
 export const printTypeDefinition = (node: ts.TypeNode) =>
 	printer.printNode(ts.EmitHint.Unspecified, node, emptySourceFile);
 
-export { SyntaxKind } from "typescript";
 export { zodToTs } from "zod-to-ts";

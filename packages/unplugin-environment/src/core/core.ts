@@ -1,7 +1,7 @@
 import path from "path";
 import { A, D, F, G, S, pipe } from "@mobily/ts-belt";
 import { z } from "zod";
-import { SyntaxKind, printTypeDefinition, zodToTs } from "./ast";
+import { printTypeDefinition, zodToTs } from "./ast";
 import type { Options, PluginOption } from "./types";
 
 const toUndefined = () => undefined;
@@ -66,8 +66,8 @@ export const createModuleDTS = (
 		A.reduce(D.makeEmpty<Record<string, z.ZodType>>(), (a, b) =>
 			D.set(a, b, z.string().optional()),
 		),
-		z.object,
-		(zo) => zo.merge(options.schema),
+		(o) => z.object(o),
+		(zo) => zo.and(options.schema),
 		zodToTs,
 		({ node }) => node,
 		printTypeDefinition,

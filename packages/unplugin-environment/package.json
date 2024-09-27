@@ -80,16 +80,10 @@
 	"types": "dist/index.d.ts",
 	"typesVersions": {
 		"*": {
-			"*": [
-				"./dist/*",
-				"./*"
-			]
+			"*": ["./dist/*", "./*"]
 		}
 	},
-	"files": [
-		"dist",
-		"client.d.ts"
-	],
+	"files": ["dist", "client.d.ts"],
 	"scripts": {
 		"prepack": "npm run build",
 		"build": "tsup",

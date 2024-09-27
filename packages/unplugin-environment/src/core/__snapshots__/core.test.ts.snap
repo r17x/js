@@ -3,11 +3,15 @@
 exports[`uplugin-environment:core > [DTS] valid create module type definition 1`] = `
 "declare module "@myenv" {
 export const env: {
+    REACT_APP_NAME?: string;
+    REACT_APP_VERSION?: string;
+    REACT_APP_DURATION?: string;
+    REACT_APP_PORT?: string;
+} & {
     REACT_APP_NAME: string;
     REACT_APP_VERSION: string;
-    REACT_APP_DURATION?: string;
-    REACT_APP_PORT: number;
     REACT_APP_AGE: number;
+    REACT_APP_PORT: number;
 }
 }"
 `;
