@@ -1,3 +1,9 @@
+## unplugin-environment [1.1.1](https://github.com/r17x/js/compare/unplugin-environment@1.1.0...unplugin-environment@1.1.1) (2024-09-27)
+
+### Bug Fixes
+
+* **unplugin-environment:** removed unused and use and instead of merge schema ([3d62c48](https://github.com/r17x/js/commit/3d62c4813d120c7349657ed18407b8f6bea2b85b))
+
 ## unplugin-environment [1.1.0](https://github.com/r17x/js/compare/unplugin-environment@1.0.0...unplugin-environment@1.1.0) (2024-09-27)
 
 ### Features
