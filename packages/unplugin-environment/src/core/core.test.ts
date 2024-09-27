@@ -9,6 +9,24 @@ describe("uplugin-environment:core", () => {
 		vi.clearAllMocks();
 	});
 
+	it("valid merge zod schema", () => {
+		expect(
+			Core.printTypeDefinition(
+				zodToTs(
+					z
+						.object({
+							REACT_APP_NAME: z.string().optional(),
+						})
+						.merge(
+							z.object({
+								REACT_APP_VERSION: z.string(),
+							}),
+						),
+				).node,
+			),
+		).matchSnapshot();
+	});
+
 	it("valid run build", () => {
 		expect(
 			Core.build({ REACT_APP_NAME: "htmx_BTW" }, Core.getOptions("REACT_APP")),
@@ -61,20 +79,50 @@ describe("uplugin-environment:core", () => {
 			moduleEnvName: "@myenv",
 		});
 
-		expect(Core.createModuleDTS(options)).toMatchSnapshot();
+		expect(
+			Core.createModuleDTS(
+				{
+					REACT_APP_NAME: "htmx_BTW",
+					REACT_APP_VERSION: "6.6.6",
+					REACT_APP_DURATION: "123",
+					REACT_APP_PORT: "8080",
+					SECRET_KEY_TOKEN_: "1234567890",
+				},
+				options,
+			),
+		).toMatchSnapshot();
 	});
 
 	it("valid create module env", () => {
-		expect(
+		expect(() =>
 			Core.load(
 				{
 					REACT_APP_NAME: "htmx_BTW",
 					REACT_APP_VERSION: "6.6.6",
+					REACT_APP_DURATION: "123",
 					SECRET_KEY_TOKEN_: "1234567890",
 				},
 				Core.getOptions({
 					match: "REACT_APP",
 					schema: z.any(),
+					moduleEnvName: "@myenv",
+				}),
+			)("@myenv"),
+		).toThrowError();
+
+		expect(
+			Core.load(
+				{
+					REACT_APP_NAME: "htmx_BTW",
+					REACT_APP_VERSION: "6.6.6",
+					REACT_APP_DURATION: "123",
+					SECRET_KEY_TOKEN_: "1234567890",
+				},
+				Core.getOptions({
+					match: "REACT_APP",
+					schema: z.object({
+						REACT_APP_NAME: z.string(),
+					}),
 					moduleEnvName: "@myenv",
 				}),
 			)("@myenv"),
@@ -184,11 +232,7 @@ describe("uplugin-environment:core", () => {
 					match: ["REACT_APP", "!REACT_APP_VERSION"],
 					schema: z.object({
 						REACT_APP_NAME: z.string(),
-						REACT_APP_PORT: z
-							.string()
-							.min(1)
-							.transform((a) => a | 0)
-							.pipe(z.number()),
+						REACT_APP_PORT: z.coerce.number().min(1),
 					}),
 				}),
 			),

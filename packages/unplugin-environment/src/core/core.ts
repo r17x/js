@@ -12,7 +12,7 @@ const matchSchema = z.string().min(1).or(z.string().min(1).array());
 
 const defaultOption = (match: Options["match"]) => ({
 	match,
-	schema: z.any(),
+	schema: z.record(z.string().optional()),
 	moduleEnvName: "@env",
 });
 
@@ -21,13 +21,14 @@ const strictOption = z.strictObject({
 	schema: z
 		.record(z.instanceof(z.ZodType))
 		.transform((a) => z.object(a))
-		.or(z.instanceof(z.ZodType)),
+		.or(z.instanceof(z.ZodObject)),
 	moduleEnvName: z.string().optional().default("@env"),
 });
 
 const option = matchSchema.transform(defaultOption).or(strictOption);
 
-export const getOptions = (o: PluginOption): Options => option.parse(o);
+export const getOptions = (o: PluginOption): Options =>
+	option.parse(o) as Options; // using as for type but don't worries, we have power of `zod`.
 
 const filterEnv = (env: Record<string, string>, m: Options["match"]) => {
 	const ms = G.isString(m) ? [m] : m;
@@ -40,9 +41,9 @@ const filterEnv = (env: Record<string, string>, m: Options["match"]) => {
 
 export const getEnv = (env: Record<string, string>, options: Options) => {
 	const filteredEnv = filterEnv(env, options.match);
-	const parsedEnv = options.schema.safeParse(filteredEnv);
+
 	return F.ifElse(
-		parsedEnv,
+		options.schema.safeParse(filteredEnv),
 		({ success }) => success,
 		({ data }) => D.merge(filteredEnv, data),
 		() => filteredEnv,
@@ -64,12 +65,29 @@ export const createModuleEnv = (
 	code: `export const env = ${JSON.stringify(getEnv(env, options))}`,
 });
 
-// TODO: will be better to use `t.factory` from 'typescript'.
-export const createModuleDTS = (options: Options) => `declare module "${
-	options.moduleEnvName
-}" {
-  export const env: ${pipe(options, getTsNodeType, printTypeDefinition)}
-}`;
+export const createModuleDTS = (
+	env: Record<string, string>,
+	options: Options,
+) =>
+	pipe(
+		D.keys(filterEnv(env, options.match)),
+		A.reduce(D.makeEmpty<Record<string, z.ZodType>>(), (a, b) =>
+			D.set(a, b, z.string().optional()),
+		),
+		z.object,
+		(zo) => zo.merge(options.schema),
+		zodToTs,
+		({ node }) => node,
+		printTypeDefinition,
+		(typeDef) => [
+			// TODO: will be better to use `t.factory` from 'typescript'.
+			`declare module "${options.moduleEnvName}" {`,
+			`export const env: ${typeDef}`,
+			"}",
+		],
+		A.join("\n"),
+		S.replaceAll("?: string | undefined", "?: string"),
+	);
 
 export const resolveId = (options: Options) =>
 	F.ifElse(
