@@ -1,10 +1,21 @@
 <div align="center">
     <h1>unplugin-environment</h1>
     <p>
-        A plugin for loading enviroment variables simple and safely.
+        A plugin for loading enviroment variables safely with schema validation, simple with virtual module, type-safe with intellisense, and better DX 🔥 🚀 👷. 
     </p>
     <p>
-        <a href="https://www.npmjs.com/package/unplugin-environment"><img src="https://img.shields.io/npm/v/unplugin-environment.svg?style=flat-square" alt="npm package"></a>
+        <a href="https://www.npmjs.com/package/unplugin-environment"><img src="https://img.shields.io/npm/v/unplugin-environment.svg?style=flat-square&label=npm:unplugin-environment" alt="npm package"></a>
+    </p>
+    <h2><strong>Supported with:</string></h2>
+    <p>
+        <a href="https://www.npmjs.com/package/next"><img src="https://img.shields.io/badge/%20Next.js-grey?style=for-the-badge&logo=nextdotjs" alt="Next.js"></a>
+        <a href="https://www.npmjs.com/package/vite"><img src="https://img.shields.io/badge/%20Vite-grey?style=for-the-badge&logo=vite" alt="Vite"></a>
+        <a href="https://www.npmjs.com/package/esbuild"><img src="https://img.shields.io/badge/%20Esbuild-grey?style=for-the-badge&logo=esbuild" alt="Esbuild"></a>
+        <a href="https://www.npmjs.com/package/webpack"><img src="https://img.shields.io/badge/%20Webpack-grey?style=for-the-badge&logo=webpack" alt="Webpack"></a>
+        <a href="https://www.npmjs.com/package/astro"><img src="https://img.shields.io/badge/%20Astro-grey?style=for-the-badge&logo=astro" alt="Astro"></a>
+        <a href="https://www.npmjs.com/package/rollup"><img src="https://img.shields.io/badge/%20Rollup-grey?style=for-the-badge&logo=rollupdotjs" alt="Rollup"></a>
+        <a href="https://www.npmjs.com/package/rspack"><img src="https://img.shields.io/badge/%20Rspack-grey?style=for-the-badge&logo=rspack" alt="Rspack"></a>
+        <a href="https://www.npmjs.com/package/@farm/core"><img src="https://img.shields.io/badge/%20Farm-grey?style=for-the-badge&logo=farmfe" alt="Farm"></a>
     </p>
 </div>
 
@@ -48,6 +59,29 @@ pnpm add unplugin-environment          # pnpm
 ### Configuration
 
 <details>
+<summary>Next.js</summary><br>
+
+```ts
+// next.config.mjs
+import Environment from 'unplugin-environment/webpack'
+
+const nextConfig = {
+    webpack(config){
+        config.plugins.push(Environment('PREFIX_APP'))
+        return config
+    },
+}
+
+export default nextConfig
+```
+<div align="right">
+    <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
+</div>
+
+<br></details>
+
+
+<details>
 <summary>Vite</summary><br>
 
 ```ts
@@ -56,7 +90,7 @@ import Environment from 'unplugin-environment/vite'
 
 export default defineConfig({
   plugins: [
-    Environment(),
+    Environment('PREFIX_APP'),
   ],
 })
 ```
@@ -75,7 +109,7 @@ import Environment from 'unplugin-environment/farm'
 
 export default defineconfig({
   plugins: [
-    Environment(),
+    Environment('PREFIX_APP'),
   ],
 })
 ```
@@ -113,7 +147,7 @@ import Environment from 'unplugin-environment/rollup'
 
 export default {
   plugins: [
-    Environment(),
+    Environment('PREFIX_APP'),
   ],
 }
 ```
@@ -153,7 +187,7 @@ import { build } from 'esbuild'
 import Environment from 'unplugin-environment/esbuild'
 
 build({
-  plugins: [Environment()],
+  plugins: [Environment('PREFIX_APP')],
 })
 ```
 
@@ -172,7 +206,7 @@ import { defineConfig } from 'astro/config'
 import Environment from 'unplugin-environment/astro'
 
 build({
-  plugins: [Environment()],
+  plugins: [Environment('PREFIX_APP')],
 })
 ```
 
