@@ -16,9 +16,11 @@ exports[`uplugin-environment:core > only for knowledge 2`] = `
 
 exports[`uplugin-environment:core > valid create module declaration 1`] = `
 "declare module "@myenv" {
-  export const env: {
+export const env: {
     REACT_APP_NAME: string;
     REACT_APP_VERSION: string;
+    REACT_APP_DURATION?: string;
+    REACT_APP_PORT?: string;
     REACT_APP_AGE: number;
 }
 }"
@@ -32,7 +34,7 @@ exports[`uplugin-environment:core > valid create module env 1`] = `
 
 exports[`uplugin-environment:core > valid create module env 2`] = `
 {
-  "code": "export const env = {"REACT_APP_NAME":"htmx_BTW","REACT_APP_VERSION":"6.6.6"}",
+  "code": "export const env = {"REACT_APP_NAME":"htmx_BTW","REACT_APP_VERSION":"6.6.6","REACT_APP_DURATION":"123"}",
 }
 `;
 
@@ -40,4 +42,11 @@ exports[`uplugin-environment:core > valid create module env 3`] = `
 {
   "code": "export const env = {"REACT_APP_NAME":"htmx_BTW","REACT_APP_VERSION":"6.6.6"}",
 }
+`;
+
+exports[`uplugin-environment:core > valid merge zod schema 1`] = `
+"{
+    REACT_APP_NAME?: string | undefined;
+    REACT_APP_VERSION: string;
+}"
 `;
