@@ -5,6 +5,16 @@
 			"include": ["packages/unplugin-*/**"],
 			"linter": {
 				"rules": {
+					"correctness": {
+						"noUnusedVariables": {
+							"fix": "safe",
+							"level": "warn"
+						},
+						"noUnusedImports": {
+							"fix": "safe",
+							"level": "warn"
+						}
+					},
 					"complexity": {
 						"noForEach": "off"
 					},
