@@ -1,4 +1,4 @@
-import type { ZodRawShape, ZodTypeAny } from "zod";
+import type { ZodObject, ZodRawShape } from "zod";
 
 export type Match = string | string[];
 /**
@@ -24,17 +24,17 @@ export type Match = string | string[];
  */
 export type Options = {
 	match: Match;
-	schema: ZodTypeAny;
+	schema: ZodObject<ZodRawShape>;
 	moduleEnvName: string;
 };
 
-type BPluginOption = {
+type SchemaOption = {
 	match: Match;
-	schema: ZodTypeAny | ZodRawShape;
+	schema: ZodObject<ZodRawShape> | ZodRawShape;
 	/**
 	 * @default '@env'
 	 */
 	moduleEnvName?: string;
 };
 
-export type PluginOption = Match | BPluginOption;
+export type PluginOption = Match | SchemaOption;
