@@ -1,3 +1,13 @@
+## unplugin-environment [1.2.0](https://github.com/r17x/js/compare/unplugin-environment@1.1.2...unplugin-environment@1.2.0) (2024-09-28)
+
+### Features
+
+* **unplugin-environment:** compatible with rolldown ([4cf33c7](https://github.com/r17x/js/commit/4cf33c7d561257ed7ed91513d5e8df2b7b619133))
+
+### Miscellaneous Chores
+
+* in release need to format all package.json after version bump ([02ee3b4](https://github.com/r17x/js/commit/02ee3b4bbe4e3bd84ca8de86cab645ea5c385454))
+
 ## unplugin-environment [1.1.2](https://github.com/r17x/js/compare/unplugin-environment@1.1.1...unplugin-environment@1.1.2) (2024-09-28)
 
 ### Bug Fixes
