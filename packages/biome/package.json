@@ -16,5 +16,8 @@
 	"files": ["index.json"],
 	"exports": {
 		".": "./index.json"
+	},
+	"scripts": {
+		"postversion": "yarn"
 	}
 }

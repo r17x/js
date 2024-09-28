@@ -85,7 +85,8 @@
 		"prepack": "npm run build",
 		"build": "tsup",
 		"build:fix": "esno ../../tooling/unplugin/postbuild.ts",
-		"dev": "tsup --watch src"
+		"dev": "tsup --watch src",
+		"postversion": "yarn"
 	},
 	"peerDependencies": {
 		"@farmfe/core": ">=1",
