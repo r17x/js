@@ -12,9 +12,7 @@
 		"access": "public",
 		"provenance": true
 	},
-	"files": [
-		"index.json"
-	],
+	"files": ["index.json"],
 	"exports": {
 		".": {
 			"require": "./index.json",
@@ -33,5 +31,11 @@
 	},
 	"peerDependencies": {
 		"semantic-release": ">=24"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.2"
+	},
+	"scripts": {
+		"postversion": "biome check --write"
 	}
 }

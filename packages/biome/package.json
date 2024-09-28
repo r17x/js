@@ -13,10 +13,14 @@
 		"provenance": true
 	},
 	"type": "module",
-	"files": [
-		"index.json"
-	],
+	"files": ["index.json"],
 	"exports": {
 		".": "./index.json"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.2"
+	},
+	"scripts": {
+		"postversion": "biome check --write"
 	}
 }

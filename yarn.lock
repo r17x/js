@@ -2225,6 +2225,8 @@ __metadata:
 "@r17x/biome@workspace:packages/biome":
   version: 0.0.0-use.local
   resolution: "@r17x/biome@workspace:packages/biome"
+  dependencies:
+    "@biomejs/biome": "npm:^1.9.2"
   languageName: unknown
   linkType: soft
 
@@ -2232,6 +2234,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@r17x/semantic-release@workspace:packages/semantic-release"
   dependencies:
+    "@biomejs/biome": "npm:^1.9.2"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^13.0.0"
     "@semantic-release/exec": "npm:^6.0.3"
@@ -13111,6 +13114,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "unplugin-environment@workspace:packages/unplugin-environment"
   dependencies:
+    "@biomejs/biome": "npm:^1.9.2"
     "@mobily/ts-belt": "npm:4.0.0-rc.1"
     "@rollup/pluginutils": "npm:^5.1.0"
     astro: "npm:^4.11.1"
@@ -13159,6 +13163,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "unplugin-rescript@workspace:packages/unplugin-rescript"
   dependencies:
+    "@biomejs/biome": "npm:^1.9.2"
     "@rollup/pluginutils": "npm:^5.1.0"
     astro: "npm:^4.11.1"
     bumpp: "npm:^9.2.0"
