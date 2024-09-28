@@ -77,15 +77,10 @@
 	"types": "dist/index.d.ts",
 	"typesVersions": {
 		"*": {
-			"*": [
-				"./dist/*",
-				"./*"
-			]
+			"*": ["./dist/*", "./*"]
 		}
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"prepack": "npm run build",
 		"build": "tsup",
@@ -139,7 +134,7 @@
 		"webpack": "^5.89.0"
 	},
 	"publishConfig": {
-		"provenance": "true",
+		"provenance": true,
 		"access": "public"
 	}
 }

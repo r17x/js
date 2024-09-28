@@ -10,11 +10,9 @@
 	},
 	"publishConfig": {
 		"access": "public",
-		"provenance": "true"
+		"provenance": true
 	},
-	"files": [
-		"index.json"
-	],
+	"files": ["index.json"],
 	"exports": {
 		".": {
 			"require": "./index.json",

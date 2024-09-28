@@ -10,7 +10,7 @@
 	},
 	"publishConfig": {
 		"access": "public",
-		"provenance": "true"
+		"provenance": true
 	},
 	"type": "module",
 	"files": ["index.json"],
