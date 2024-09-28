@@ -2210,6 +2210,8 @@ __metadata:
     "@semantic-release/npm": "npm:^12.0.1"
     "@semantic-release/release-notes-generator": "npm:^14.0.1"
     conventional-changelog-conventionalcommits: "npm:^8.0.0"
+  peerDependencies:
+    semantic-release: ">=24"
   languageName: unknown
   linkType: soft
 

@@ -12,6 +12,9 @@
 		"access": "public",
 		"provenance": true
 	},
+	"scripts": {
+		"postversion": "yarn"
+	},
 	"files": ["index.json"],
 	"exports": {
 		".": {
@@ -28,5 +31,8 @@
 		"@semantic-release/npm": "^12.0.1",
 		"@semantic-release/release-notes-generator": "^14.0.1",
 		"conventional-changelog-conventionalcommits": "^8.0.0"
+	},
+	"peerDependencies": {
+		"semantic-release": ">=24"
 	}
 }
