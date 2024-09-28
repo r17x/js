@@ -4,3 +4,5 @@ comment:
 
 ignore:
   - "playground"
+
+slack_app: false
