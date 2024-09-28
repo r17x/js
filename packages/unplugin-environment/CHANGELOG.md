@@ -1,3 +1,14 @@
+## unplugin-environment [1.2.3](https://github.com/r17x/js/compare/unplugin-environment@1.2.2...unplugin-environment@1.2.3) (2024-09-28)
+
+### Bug Fixes
+
+* **unplugin-environment:** bump unplugin for fixed virtual module issue in rspack ([8aacbbb](https://github.com/r17x/js/commit/8aacbbb2bc1474e4962874cd01148dce85ac6067))
+
+### Miscellaneous Chores
+
+* add biome on each package ([f599722](https://github.com/r17x/js/commit/f599722fb6612cb5f1f58e31c84d540bc2b31414))
+* **deps-dev:** add @rspack/core ([42d7f90](https://github.com/r17x/js/commit/42d7f90a7cf40bdf848837948bb670fa0d22ea02))
+
 ## unplugin-environment [1.2.2](https://github.com/r17x/js/compare/unplugin-environment@1.2.1...unplugin-environment@1.2.2) (2024-09-28)
 
 ### Bug Fixes
