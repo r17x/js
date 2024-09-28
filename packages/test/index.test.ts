@@ -1,11 +1,5 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import * as farm from "@farmfe/core";
-// import * as rspack from "@rspack/core";
-import * as esbuild from "esbuild";
-import * as rolldown from "rolldown";
-import * as rollup from "rollup";
-import * as vite from "vite";
 import {
 	afterEach,
 	beforeAll,
@@ -15,7 +9,6 @@ import {
 	it,
 	vi,
 } from "vitest";
-import * as webpack from "webpack";
 import { z } from "zod";
 import * as EnvironmentCore from "./../unplugin-environment/src/core/core";
 import EnvironmentEsbuild from "./../unplugin-environment/src/esbuild";
@@ -23,52 +16,21 @@ import EnvironmentFarm from "./../unplugin-environment/src/farm";
 import Environment from "./../unplugin-environment/src/index";
 import EnvironmentRolldown from "./../unplugin-environment/src/rolldown";
 import EnvironmentRollup from "./../unplugin-environment/src/rollup";
+import EnvironmentRspack from "./../unplugin-environment/src/rspack";
 import EnvironmentVite from "./../unplugin-environment/src/vite";
 import EnvironmentWebpack from "./../unplugin-environment/src/webpack";
 
-const viteBuild = vite.build;
-const farmBuild = farm.build;
-const rollupBuild = rollup.rollup;
-const rolldownBuild = rolldown.rolldown;
-const esbuildBuild = esbuild.build;
-const webpackBuild: typeof webpack.webpack =
-	// biome-ignore lint/suspicious/noExplicitAny: false
-	webpack.webpack || (webpack as any).default || webpack;
-// const rspackBuild = rspack.rspack;
+import { type RspackOptions, build, webpackVersion } from "./utils";
 
-// biome-ignore lint/suspicious/noExplicitAny: false
-const webpackVersion = ((webpack as any).default || webpack).version;
-
-const build: {
-	webpack: typeof webpack.webpack;
-	// rspack: typeof rspackBuild;
-	rollup: typeof rollupBuild;
-	rolldown: typeof rolldownBuild;
-	vite: typeof viteBuild;
-	farm: typeof farmBuild;
-	esbuild: typeof esbuildBuild;
-} = {
-	farm: farmBuild,
-	webpack: webpackBuild,
-	// rspack: rspackBuild,
-	rollup: rollupBuild,
-	rolldown: rolldownBuild,
-	vite(config) {
-		return viteBuild(
-			vite.mergeConfig(config || {}, {
-				build: {
-					rollupOptions: {
-						logLevel: "silent",
-					},
-				},
-				logLevel: "silent",
-			}),
-		);
-	},
-	esbuild: esbuildBuild,
-};
-
-const unSkipped = ["farm", "webpack", "vite", "esbuild", "rollup", "rolldown"];
+const unSkipped = [
+	"farm",
+	"webpack",
+	"vite",
+	"esbuild",
+	"rollup",
+	"rolldown",
+	"rspack",
+];
 
 describe.sequential.each([
 	{
@@ -79,6 +41,7 @@ describe.sequential.each([
 			esbuild: EnvironmentEsbuild,
 			rollup: EnvironmentRollup,
 			rolldown: EnvironmentRolldown,
+			rspack: EnvironmentRspack,
 		},
 		pluginName: "unplugin-environment",
 		pluginOption: "REACT_APP",
@@ -91,6 +54,7 @@ describe.sequential.each([
 			esbuild: EnvironmentEsbuild,
 			rollup: EnvironmentRollup,
 			rolldown: EnvironmentRolldown,
+			rspack: EnvironmentRspack,
 		},
 		pluginName: "unplugin-environment",
 		pluginOption: {
@@ -306,30 +270,40 @@ describe.sequential.each([
 			},
 		);
 
-		it.todo("rspack", async () => {
-			// expect.assertions(3);
-			// const { default: plugin } = await import(`${pluginRoot}/src/rspack`);
-			// const rspackOptions: rspack.RspackOptions = {
-			// 	entry: path.resolve(__dirname, "test.src/entry.js"),
-			// 	plugins: [plugin(pluginOption)],
-			// 	devtool: "source-map",
-			// 	output: {
-			// 		path: path.resolve(__dirname, "test.out/rspack"),
-			// 		filename: "output.js",
-			// 		library: {
-			// 			type: "commonjs",
-			// 		},
-			// 	},
-			// };
-			// await new Promise((resolve) => {
-			// 	build.rspack(rspackOptions, resolve);
-			// });
-			// const sourcemap = await readSourcemap("rspack");
-			// const virtualModule = sourcemap.sourcesContent[0];
-			// expect(sourcemap.sources[0]).toBe("../../../../@env");
-			// expect(virtualModule).toBe(
-			// 	`export const env = ${JSON.stringify({ REACT_APP_NAME: "test" })}`,
-			// );
-		});
+		it.skipIf(isSkipped("rspack"))(
+			`build ${pluginName} with rspack`,
+			async () => {
+				const rspackOptions: RspackOptions = {
+					entry: path.resolve(__dirname, "test.src/entry.js"),
+					plugins: [plugin.rspack(pluginOption)],
+					devtool: "source-map",
+					output: {
+						path: path.resolve(__dirname, "test.out/rspack"),
+						filename: "output.js",
+						library: {
+							type: "commonjs",
+						},
+					},
+				};
+				const compiler = build.rspack(rspackOptions);
+				await new Promise((resolve, reject) => {
+					compiler.run((err, stats) => {
+						if (err || stats?.hasErrors()) {
+							console.log(stats?.toJson().errors);
+							compiler.close(reject);
+						}
+						compiler.close(resolve);
+					});
+				});
+				const sourcemap = await readSourcemap("rspack");
+				const virtualModule = sourcemap.sourcesContent[1];
+				expect(sourcemap.sources[1]).toBe(
+					"webpack://js/./node_modules/.virtual/%40env",
+				);
+				expect(virtualModule).toBe(
+					`export const env = ${JSON.stringify({ REACT_APP_NAME: "test" })}`,
+				);
+			},
+		);
 	},
 );
