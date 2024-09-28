@@ -52,10 +52,13 @@ export const unpluginFactory: UnpluginFactory<PluginOption> = (o) => {
 		name: "unplugin-environment",
 		enforce: "pre",
 		resolveId: Core.resolveId(options),
+		loadInclude: Core.loadInclude(options),
 		load: Core.load(env, options),
 		watchChange: Core.watchChange([".env"], () => {
 			dotenvConfig({ processEnv: env });
 		}),
-		buildStart: () => Core.build(env, options).then(writer).catch(logError),
+		buildStart: async () => {
+			await Core.build(env, options).then(writer).catch(logError);
+		},
 	};
 };

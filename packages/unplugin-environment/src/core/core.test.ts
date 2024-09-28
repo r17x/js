@@ -214,7 +214,7 @@ describe("uplugin-environment:core", () => {
 		const options = Core.getOptions("REACT_APP");
 
 		expect(Core.resolveId(options)("@env")).toBe("@env");
-		expect(Core.resolveId(options)("@env.ts")).toBeUndefined();
+		expect(Core.resolveId(options)("@env.ts")).toBeNull();
 		expect(Core.resolveId(options)("@env.ts")).not.toBe("@env");
 	});
 

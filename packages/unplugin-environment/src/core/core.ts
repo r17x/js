@@ -81,11 +81,15 @@ export const createModuleDTS = (
 		S.replaceAll("?: string | undefined", "?: string"),
 	);
 
+// NOTE: must be adjust for this function when need to load `@env/*`.
+export const loadInclude = (options: Options) =>
+	S.endsWith(options.moduleEnvName);
+
 export const resolveId = (options: Options) =>
 	F.ifElse(
-		(id: string) => id === options.moduleEnvName,
+		loadInclude(options),
 		() => options.moduleEnvName,
-		toUndefined,
+		() => null,
 	);
 
 export const load = (env: Record<string, string>, options: Options) =>
