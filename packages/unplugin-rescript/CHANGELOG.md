@@ -1,3 +1,9 @@
+## unplugin-rescript [0.0.4](https://github.com/r17x/js/compare/unplugin-rescript@0.0.3...unplugin-rescript@0.0.4) (2024-09-28)
+
+### Bug Fixes
+
+* all publish with provenance ([4346cd2](https://github.com/r17x/js/commit/4346cd2bbb4e1a72c8034f4b2c72b622e60f982d))
+
 ## unplugin-rescript [0.0.3](https://github.com/r17x/js/compare/unplugin-rescript@0.0.2...unplugin-rescript@0.0.3) (2024-09-28)
 
 ### Bug Fixes
