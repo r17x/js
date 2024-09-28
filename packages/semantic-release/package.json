@@ -1,7 +1,7 @@
 {
 	"name": "@r17x/semantic-release",
 	"description": "semantic-release configuration",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"homepage": "https://github.com/r17x/js/tree/main/packages/semantic-release",
 	"repository": {
 		"type": "git",
@@ -12,7 +12,9 @@
 		"access": "public",
 		"provenance": true
 	},
-	"files": ["index.json"],
+	"files": [
+		"index.json"
+	],
 	"exports": {
 		".": {
 			"require": "./index.json",
