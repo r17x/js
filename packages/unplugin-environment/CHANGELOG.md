@@ -1,3 +1,14 @@
+## unplugin-environment [1.2.1](https://github.com/r17x/js/compare/unplugin-environment@1.2.0...unplugin-environment@1.2.1) (2024-09-28)
+
+### Bug Fixes
+
+* release with provenance and update homepage ([ff41dee](https://github.com/r17x/js/commit/ff41dee8bf74ed12e8bc525fc44144e48ade7a90))
+
+### Miscellaneous Chores
+
+* removed postversion and disable workspace-update ([4c9e57a](https://github.com/r17x/js/commit/4c9e57aeb00fa5d1c9b6b60d1338f216e788c8f2))
+* repository field information ([c8c864d](https://github.com/r17x/js/commit/c8c864d2b3e8a6f3d040ce34e063b0efe9d3beb7))
+
 ## unplugin-environment [1.2.0](https://github.com/r17x/js/compare/unplugin-environment@1.1.2...unplugin-environment@1.2.0) (2024-09-28)
 
 ### Features
