@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/r17x/js/tree/main/packages/semantic-release",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/r17x/js.git",
+		"url": "git+https://github.com/r17x/js.git",
 		"directory": "packages/semantic-release"
 	},
 	"publishConfig": {

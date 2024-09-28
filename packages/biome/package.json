@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/r17x/js/tree/main/packages/biome",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/r17x/js.git",
+		"url": "git+https://github.com/r17x/js.git",
 		"directory": "packages/biome"
 	},
 	"publishConfig": {
