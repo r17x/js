@@ -1,3 +1,9 @@
+## unplugin-environment [1.2.2](https://github.com/r17x/js/compare/unplugin-environment@1.2.1...unplugin-environment@1.2.2) (2024-09-28)
+
+### Bug Fixes
+
+* all publish with provenance ([4346cd2](https://github.com/r17x/js/commit/4346cd2bbb4e1a72c8034f4b2c72b622e60f982d))
+
 ## unplugin-environment [1.2.1](https://github.com/r17x/js/compare/unplugin-environment@1.2.0...unplugin-environment@1.2.1) (2024-09-28)
 
 ### Bug Fixes
