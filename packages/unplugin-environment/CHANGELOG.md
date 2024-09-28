@@ -1,3 +1,13 @@
+## unplugin-environment [1.1.2](https://github.com/r17x/js/compare/unplugin-environment@1.1.1...unplugin-environment@1.1.2) (2024-09-28)
+
+### Bug Fixes
+
+* **unplugin-environment:** virtual module in @farmfe/core ([18b9088](https://github.com/r17x/js/commit/18b9088d87b2b3f0876178917a58b28f2578ca2f))
+
+### Tests
+
+* **unplugin-environment:** create test for build ([f64e105](https://github.com/r17x/js/commit/f64e105335f08e433c1e14c3fdd939763d1a9c43))
+
 ## unplugin-environment [1.1.1](https://github.com/r17x/js/compare/unplugin-environment@1.1.0...unplugin-environment@1.1.1) (2024-09-27)
 
 ### Bug Fixes

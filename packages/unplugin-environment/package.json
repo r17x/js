@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-environment",
 	"type": "module",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "A plugin for loading enviroment variables safely with schema validation, simple with virtual module, type-safe with intellisense, and better DX 🔥 🚀 👷. Support with Next.js, Vite, Webpack, Rollup, Rspack, Farm, and more.",
 	"license": "MIT",
 	"author": "r17x <hi@rin.rocks>",
@@ -80,10 +80,16 @@
 	"types": "dist/index.d.ts",
 	"typesVersions": {
 		"*": {
-			"*": ["./dist/*", "./*"]
+			"*": [
+				"./dist/*",
+				"./*"
+			]
 		}
 	},
-	"files": ["dist", "client.d.ts"],
+	"files": [
+		"dist",
+		"client.d.ts"
+	],
 	"scripts": {
 		"prepack": "npm run build",
 		"build": "tsup",
