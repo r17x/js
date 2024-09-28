@@ -1,3 +1,13 @@
+## @r17x/biome [1.0.2](https://github.com/r17x/js/compare/@r17x/biome@1.0.1...@r17x/biome@1.0.2) (2024-09-28)
+
+### Bug Fixes
+
+* all publish with provenance ([4346cd2](https://github.com/r17x/js/commit/4346cd2bbb4e1a72c8034f4b2c72b622e60f982d))
+
+### Miscellaneous Chores
+
+* removed postversion and disable workspace-update ([4c9e57a](https://github.com/r17x/js/commit/4c9e57aeb00fa5d1c9b6b60d1338f216e788c8f2))
+
 ## @r17x/biome [1.0.1](https://github.com/r17x/js/compare/@r17x/biome@1.0.0...@r17x/biome@1.0.1) (2024-09-28)
 
 ### Bug Fixes

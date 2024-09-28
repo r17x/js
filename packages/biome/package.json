@@ -1,7 +1,7 @@
 {
 	"name": "@r17x/biome",
 	"description": "biomejs.dev configuration",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"homepage": "https://github.com/r17x/js/tree/main/packages/biome",
 	"repository": {
 		"type": "git",
@@ -13,7 +13,9 @@
 		"provenance": true
 	},
 	"type": "module",
-	"files": ["index.json"],
+	"files": [
+		"index.json"
+	],
 	"exports": {
 		".": "./index.json"
 	}
