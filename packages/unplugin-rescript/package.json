@@ -5,7 +5,7 @@
 	"description": "a plugin for integration ReScript with most Bundler (Vite, Rollup, Webpack, Esbuild, etc).",
 	"license": "MIT",
 	"author": "r17x <hi@rin.rocks>",
-	"homepage": "https://github.com/r17x/js#readme",
+	"homepage": "https://github.com/r17x/js/tree/main/packages/unplugin-rescript#readme",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/r17x/js.git",
@@ -133,5 +133,9 @@
 		"typescript": "^5.3.2",
 		"vite": "^5.0.4",
 		"webpack": "^5.89.0"
+	},
+	"publishConfig": {
+		"provenance": "true",
+		"access": "public"
 	}
 }
