@@ -95,4 +95,6 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: release
-        run: yarn release
+        run: |
+          npm config set workspaces-update false
+          yarn release

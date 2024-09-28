@@ -12,9 +12,6 @@
 		"access": "public",
 		"provenance": "true"
 	},
-	"scripts": {
-		"postversion": "yarn"
-	},
 	"files": ["index.json"],
 	"exports": {
 		".": {

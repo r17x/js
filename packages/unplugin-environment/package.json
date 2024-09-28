@@ -91,7 +91,6 @@
 	"files": ["dist", "client.d.ts"],
 	"scripts": {
 		"prepack": "npm run build",
-		"postversion": "yarn",
 		"build": "tsup",
 		"build:fix": "esno ../../tooling/unplugin/postbuild.ts",
 		"dev": "tsup --watch src"
