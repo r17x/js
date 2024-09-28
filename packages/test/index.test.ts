@@ -3,6 +3,7 @@ import * as path from "node:path";
 import * as farm from "@farmfe/core";
 // import * as rspack from "@rspack/core";
 import * as esbuild from "esbuild";
+import * as rolldown from "rolldown";
 import * as rollup from "rollup";
 import * as vite from "vite";
 import {
@@ -20,6 +21,7 @@ import * as EnvironmentCore from "./../unplugin-environment/src/core/core";
 import EnvironmentEsbuild from "./../unplugin-environment/src/esbuild";
 import EnvironmentFarm from "./../unplugin-environment/src/farm";
 import Environment from "./../unplugin-environment/src/index";
+import EnvironmentRolldown from "./../unplugin-environment/src/rolldown";
 import EnvironmentRollup from "./../unplugin-environment/src/rollup";
 import EnvironmentVite from "./../unplugin-environment/src/vite";
 import EnvironmentWebpack from "./../unplugin-environment/src/webpack";
@@ -27,6 +29,7 @@ import EnvironmentWebpack from "./../unplugin-environment/src/webpack";
 const viteBuild = vite.build;
 const farmBuild = farm.build;
 const rollupBuild = rollup.rollup;
+const rolldownBuild = rolldown.rolldown;
 const esbuildBuild = esbuild.build;
 const webpackBuild: typeof webpack.webpack =
 	// biome-ignore lint/suspicious/noExplicitAny: false
@@ -40,6 +43,7 @@ const build: {
 	webpack: typeof webpack.webpack;
 	// rspack: typeof rspackBuild;
 	rollup: typeof rollupBuild;
+	rolldown: typeof rolldownBuild;
 	vite: typeof viteBuild;
 	farm: typeof farmBuild;
 	esbuild: typeof esbuildBuild;
@@ -48,6 +52,7 @@ const build: {
 	webpack: webpackBuild,
 	// rspack: rspackBuild,
 	rollup: rollupBuild,
+	rolldown: rolldownBuild,
 	vite(config) {
 		return viteBuild(
 			vite.mergeConfig(config || {}, {
@@ -63,7 +68,7 @@ const build: {
 	esbuild: esbuildBuild,
 };
 
-const unSkipped = ["farm", "webpack", "vite", "esbuild", "rollup"];
+const unSkipped = ["farm", "webpack", "vite", "esbuild", "rollup", "rolldown"];
 
 describe.sequential.each([
 	{
@@ -73,6 +78,7 @@ describe.sequential.each([
 			vite: EnvironmentVite,
 			esbuild: EnvironmentEsbuild,
 			rollup: EnvironmentRollup,
+			rolldown: EnvironmentRolldown,
 		},
 		pluginName: "unplugin-environment",
 		pluginOption: "REACT_APP",
@@ -84,6 +90,7 @@ describe.sequential.each([
 			vite: EnvironmentVite,
 			esbuild: EnvironmentEsbuild,
 			rollup: EnvironmentRollup,
+			rolldown: EnvironmentRolldown,
 		},
 		pluginName: "unplugin-environment",
 		pluginOption: {
@@ -267,6 +274,32 @@ describe.sequential.each([
 					);
 
 				const sourcemap = await readSourcemap("rollup");
+				const virtualModule = sourcemap.sourcesContent[0];
+				expect(sourcemap.sources[0]).toBe("../../../../@env");
+				expect(virtualModule).toBe(expected);
+			},
+		);
+
+		it.skipIf(isSkipped("rolldown"))(
+			`build ${pluginName} with rolldown`,
+			async () => {
+				await build
+					.rolldown({
+						plugins: [plugin.rolldown(pluginOption)],
+						input: path.resolve(__dirname, "test.src/entry.js"),
+						treeshake: false,
+					})
+					.then((rolldownBuild) =>
+						rolldownBuild.write({
+							format: "cjs",
+							dir: path.resolve(__dirname, "test.out/rolldown"),
+							exports: "named",
+							sourcemap: true,
+							entryFileNames: "output.js",
+						}),
+					);
+
+				const sourcemap = await readSourcemap("rolldown");
 				const virtualModule = sourcemap.sourcesContent[0];
 				expect(sourcemap.sources[0]).toBe("../../../../@env");
 				expect(virtualModule).toBe(expected);

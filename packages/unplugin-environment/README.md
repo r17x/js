@@ -14,6 +14,7 @@
         <a href="https://www.npmjs.com/package/webpack"><img src="https://img.shields.io/badge/%20Webpack-grey?style=for-the-badge&logo=webpack" alt="Webpack"></a>
         <a href="https://www.npmjs.com/package/astro"><img src="https://img.shields.io/badge/%20Astro-grey?style=for-the-badge&logo=astro" alt="Astro"></a>
         <a href="https://www.npmjs.com/package/rollup"><img src="https://img.shields.io/badge/%20Rollup-grey?style=for-the-badge&logo=rollupdotjs" alt="Rollup"></a>
+        <a href="https://www.npmjs.com/package/rolldown"><img src="https://img.shields.io/badge/%20Rolldown-grey?style=for-the-badge&logo=rolldown" alt="Rolldown"></a>
         <a href="https://www.npmjs.com/package/rspack"><img src="https://img.shields.io/badge/%20Rspack-grey?style=for-the-badge&logo=rspack" alt="Rspack"></a>
         <a href="https://www.npmjs.com/package/@farm/core"><img src="https://img.shields.io/badge/%20Farm-grey?style=for-the-badge&logo=farmfe" alt="Farm"></a>
     </p>
@@ -144,6 +145,27 @@ module.exports = {
 ```ts
 // rollup.config.js
 import Environment from 'unplugin-environment/rollup'
+
+export default {
+  plugins: [
+    Environment('PREFIX_APP'),
+  ],
+}
+```
+
+<div align="right">
+    <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
+</div>
+
+<br></details>
+
+
+<details>
+<summary>Rolldown</summary><br>
+
+```ts
+// rolldown.config.js
+import Environment from 'unplugin-environment/rolldown'
 
 export default {
   plugins: [
