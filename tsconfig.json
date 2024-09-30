@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"paths": {
+			"unplugin-environment": ["./packages/unplugin-environment/src/index.ts"],
+			"unplugin-environment/*": ["./packages/unplugin-environment/src/*"]
+		}
+	}
+}
