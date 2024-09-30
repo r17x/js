@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-environment",
 	"type": "module",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "A plugin for loading enviroment variables safely with schema validation, simple with virtual module, type-safe with intellisense, and better DX 🔥 🚀 👷. Support with Next.js, Vite, Webpack, Rollup, Rspack, Farm, and more.",
 	"license": "MIT",
 	"author": "r17x <hi@rin.rocks>",

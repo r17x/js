@@ -1,3 +1,9 @@
+## unplugin-environment [1.2.4](https://github.com/r17x/js/compare/unplugin-environment@1.2.3...unplugin-environment@1.2.4) (2024-09-30)
+
+### Bug Fixes
+
+* **unplugin-environment:** merge type match env and schema ([b0f9123](https://github.com/r17x/js/commit/b0f9123de398a5765bcbdca0125977e9d6d250c5))
+
 ## unplugin-environment [1.2.3](https://github.com/r17x/js/compare/unplugin-environment@1.2.2...unplugin-environment@1.2.3) (2024-09-28)
 
 ### Bug Fixes
