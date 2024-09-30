@@ -1,3 +1,9 @@
+## unplugin-environment [1.2.5](https://github.com/r17x/js/compare/unplugin-environment@1.2.4...unplugin-environment@1.2.5) (2024-09-30)
+
+### Bug Fixes
+
+* **unplugin-environment:** handle complex schema type ([e5f5303](https://github.com/r17x/js/commit/e5f53030f906fd06c3c95c64e3409ec0c9e7ef18))
+
 ## unplugin-environment [1.2.4](https://github.com/r17x/js/compare/unplugin-environment@1.2.3...unplugin-environment@1.2.4) (2024-09-30)
 
 ### Bug Fixes
