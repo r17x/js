@@ -1,12 +1,15 @@
 <div align="center">
     <h1>unplugin-environment</h1>
     <p>
-        A plugin for loading enviroment variables safely with schema validation, simple with virtual module, type-safe with intellisense, and better DX 🔥 🚀 👷. 
+        A powerful plugin for safely loading environment variables with schema validation. Simple to use with virtual modules, type-safe with TypeScript support, and designed for a better developer experience. 🔥 🚀 👷
     </p>
     <p>
-        <a href="https://www.npmjs.com/package/unplugin-environment"><img src="https://img.shields.io/npm/v/unplugin-environment.svg?style=flat-square&label=npm:unplugin-environment" alt="npm package"></a>
+        <a href="https://www.npmjs.com/package/unplugin-environment">
+            <img src="https://img.shields.io/npm/v/unplugin-environment.svg?style=flat-square&label=npm:unplugin-environment" alt="npm package" />
+            <img src="https://img.shields.io/npm/dw/unplugin-environment.svg?style=flat-square&label=Downloads" alt="npm package downloads" />
+        </a>
     </p>
-    <h2><strong>Supported with:</string></h2>
+    <h2><strong>Supports:</string></h2>
     <p>
         <a href="https://www.npmjs.com/package/next"><img src="https://img.shields.io/badge/%20Next.js-grey?style=for-the-badge&logo=nextdotjs" alt="Next.js"></a>
         <a href="https://www.npmjs.com/package/vite"><img src="https://img.shields.io/badge/%20Vite-grey?style=for-the-badge&logo=vite" alt="Vite"></a>
@@ -35,13 +38,14 @@
 
 ## Features
 
-* 🔥 Safely load environment variables with schema validation. 
-    * say no to `Im forgot define env variable` and error 😢.
-    * say no to expose sensitive information.
-* ✍️ Typed environment variables (automatically inferred based on your configuration).
-* 👍 Simple and lightweight API for accessing environment variables.
+* 🔐 **Secure**: Load environment variables safely with schema validation to avoid errors and prevent exposing sensitive information.
+* ✍️ **Type-Safe**: Automatically inferred types based on your schema configuration.
+* ⚡ **Developer-Friendly**: Lightweight and simple API for managing environment variables with seamless TypeScript integration.
 
 ## Installation
+
+Install via your preferred package manager:
+
 ```bash
 npm install unplugin-environment       # npm
 
@@ -128,7 +132,7 @@ export default defineconfig({
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-environment/rspack')()
+    require('unplugin-environment/rspack')('PREFIX_APP')
   ]
 }
 ```
@@ -189,7 +193,7 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-environment/webpack')()
+    require('unplugin-environment/webpack')("PREFIX_APP")
   ]
 }
 ```
@@ -240,7 +244,7 @@ build({
 
 #### Schema Validation
 
-You can use the `schema` option with [zod](https://github.com/colinhacks/zod) to validate the environment variables. it will produce a type and `virtual module` for you.
+Use the `schema` option with [zod](https://github.com/colinhacks/zod_) for validating environment variables. This automatically creates a virtual module with types.
 
 
 ```ts
@@ -257,6 +261,8 @@ Environment({
 </div>
 
 #### Intellisense with TypeScript
+To enable Intellisense for environment variables, add the following to your `tsconfig.json`:
+
 ```json
 {
     "compilerOptions": {
@@ -270,14 +276,15 @@ Environment({
 
 ### Accessing Environment Variables
 
-You can acess environment vareiables from `Virtual` module called `@env`.
+You can access environment variables from the virtual module `@env`:
+
 ```typescript
 import { env } from '@env'
 
 console.log(env.PREFIX_APP_NAME)
 ```
 
-if you want to change the module name, you can define the `moduleEnvName` option.
+If you want to customize the module name, use the `moduleEnvName` option:
 
 ```typescript
 // in plugin configuration
