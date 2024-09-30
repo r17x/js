@@ -67,7 +67,7 @@ export const createModuleDTS = (
 			D.set(a, b, z.string().optional()),
 		),
 		(o) => z.object(o),
-		(zo) => zo.and(options.schema),
+		(zo) => zo.merge(options.schema),
 		zodToTs,
 		({ node }) => node,
 		printTypeDefinition,
