@@ -49,3 +49,8 @@ export const build: {
 };
 
 export type { RspackOptions } from "@rspack/core";
+export type FarmOptions = farm.FarmCLIOptions & farm.UserConfig;
+export type EsbuildOptions = esbuild.BuildOptions;
+export type RolldownOptions = rolldown.RolldownOptions;
+export type RollupOptions = rollup.RollupOptions;
+export type ViteOptions = vite.UserConfig;

@@ -1,5 +1,14 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
+import Environment from "unplugin-environment";
+import * as EnvironmentCore from "unplugin-environment/core/core";
+import EnvironmentEsbuild from "unplugin-environment/esbuild";
+import EnvironmentFarm from "unplugin-environment/farm";
+import EnvironmentRolldown from "unplugin-environment/rolldown";
+import EnvironmentRollup from "unplugin-environment/rollup";
+import EnvironmentRspack from "unplugin-environment/rspack";
+import EnvironmentVite from "unplugin-environment/vite";
+import EnvironmentWebpack from "unplugin-environment/webpack";
 import {
 	afterEach,
 	beforeAll,
@@ -10,15 +19,6 @@ import {
 	vi,
 } from "vitest";
 import { z } from "zod";
-import * as EnvironmentCore from "./../unplugin-environment/src/core/core";
-import EnvironmentEsbuild from "./../unplugin-environment/src/esbuild";
-import EnvironmentFarm from "./../unplugin-environment/src/farm";
-import Environment from "./../unplugin-environment/src/index";
-import EnvironmentRolldown from "./../unplugin-environment/src/rolldown";
-import EnvironmentRollup from "./../unplugin-environment/src/rollup";
-import EnvironmentRspack from "./../unplugin-environment/src/rspack";
-import EnvironmentVite from "./../unplugin-environment/src/vite";
-import EnvironmentWebpack from "./../unplugin-environment/src/webpack";
 
 import { type RspackOptions, build, webpackVersion } from "./utils";
 
