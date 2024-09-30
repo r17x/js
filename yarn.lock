@@ -4008,13 +4008,13 @@ __metadata:
   linkType: hard
 
 "bumpp@npm:^9.2.0":
-  version: 9.5.2
-  resolution: "bumpp@npm:9.5.2"
+  version: 9.6.1
+  resolution: "bumpp@npm:9.6.1"
   dependencies:
     "@jsdevtools/ez-spawn": "npm:^3.0.4"
-    c12: "npm:^1.11.1"
+    c12: "npm:^1.11.2"
     cac: "npm:^6.7.14"
-    escalade: "npm:^3.1.2"
+    escalade: "npm:^3.2.0"
     fast-glob: "npm:^3.3.2"
     js-yaml: "npm:^4.1.0"
     jsonc-parser: "npm:^3.3.1"
@@ -4022,7 +4022,7 @@ __metadata:
     semver: "npm:^7.6.3"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10c0/a68e6188c64eec68df28ace009923fd3cf8929017f2b1843255d49fa7e4a6d75b56f596898128768e0a6b45680ac19169393305da2a5f510d41b1756ea88162f
+  checksum: 10c0/c454f38bdb6d2369797e841da004189bc1090c44ef2c40b168d2415c7f57a14fd9f55f45da6942f8f629dac59733c07efdce2ec91503eda8a01e5c8af2fe61d8
   languageName: node
   linkType: hard
 
@@ -4062,7 +4062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c12@npm:^1.11.1":
+"c12@npm:^1.11.2":
   version: 1.11.2
   resolution: "c12@npm:1.11.2"
   dependencies:
@@ -5626,7 +5626,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escalade@npm:^3.1.1, escalade@npm:^3.1.2":
+"escalade@npm:^3.1.1, escalade@npm:^3.1.2, escalade@npm:^3.2.0":
   version: 3.2.0
   resolution: "escalade@npm:3.2.0"
   checksum: 10c0/ced4dd3a78e15897ed3be74e635110bbf3b08877b0a41be50dcb325ee0e0b5f65fc2d50e9845194d7c4633f327e2e1c6cce00a71b617c5673df0374201d67f65
