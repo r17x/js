@@ -5763,13 +5763,13 @@ __metadata:
   linkType: hard
 
 "esno@npm:^4.0.0":
-  version: 4.7.0
-  resolution: "esno@npm:4.7.0"
+  version: 4.8.0
+  resolution: "esno@npm:4.8.0"
   dependencies:
-    tsx: "npm:^4.7.1"
+    tsx: "npm:^4.19.1"
   bin:
     esno: esno.js
-  checksum: 10c0/bc99a2a59409d2b3980fef9a7a7f1c3057f68c46f2bf4d94b8d1ce43784a1d15777076464f3e23e4524f60e2383e6322861996816fbbc2f44084841db2af86ca
+  checksum: 10c0/3524105c4c50fa2757367ffcffa6899beb032e219c87c3e47ad9f17d3e155c9ad8b499a8f5da56dd74e489eeb28c2766e14f0dabeac9b5b4d204d74391248cf9
   languageName: node
   linkType: hard
 
@@ -12920,7 +12920,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.7.1":
+"tsx@npm:^4.19.1":
   version: 4.19.1
   resolution: "tsx@npm:4.19.1"
   dependencies:
