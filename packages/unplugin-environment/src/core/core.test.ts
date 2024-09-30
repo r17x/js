@@ -76,6 +76,15 @@ describe("uplugin-environment:core", () => {
 				REACT_APP_VERSION: z.string(),
 				REACT_APP_AGE: z.number(),
 				REACT_APP_PORT: z.coerce.number().min(1),
+				REACT_APP_DATA: z
+					.string()
+					.transform((a) => JSON.parse(a))
+					.pipe(
+						z.object({
+							age: z.number(),
+							name: z.string(),
+						}),
+					),
 			},
 			moduleEnvName: "@myenv",
 		});
@@ -87,6 +96,7 @@ describe("uplugin-environment:core", () => {
 					REACT_APP_VERSION: "6.6.6",
 					REACT_APP_DURATION: "123",
 					REACT_APP_PORT: "8080",
+					REACT_APP_DATA: JSON.stringify({ age: 123, name: "htmx_BTW" }),
 					SECRET_KEY_TOKEN_: "1234567890",
 				},
 				options,
