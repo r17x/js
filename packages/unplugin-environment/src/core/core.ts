@@ -107,18 +107,21 @@ export const createModuleEnvServer = (
 	options: Options,
 ) => ({
 	code: `
-  const isServer = (() => typeof window === "undefined")()
+  const isServer = (() => {
+    const isBrowser = typeof window !== "undefined" 
+    if(isBrowser) {
+      console.error("❌ Invalid accessing environment variables server in [CLIENT]");
+      throw new Error("Invalid accessing environment variables server in [CLIENT]");
+    }
+    return !isBrowser 
+  })()
 
-  const env = new Proxy(process.env, {
+  const _env = (() => process?.env || {})
+
+  const env = new Proxy(_env, {
     get(target, key){
       if (typeof prop !== "string") return undefined;
       const serverKeys = ${JSON.stringify(D.keys(filterEnv(env, options.match)))};
-
-      if (!isServer || !serverKeys.includes(key)) {
-        console.error("❌ Invalid accessing environment variables in Server");
-        throw new Error("Invalid accessing environment variables in Server");
-      } 
-
       return target[key];
     }
   })
