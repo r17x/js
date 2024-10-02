@@ -45,6 +45,7 @@ const input = {
 	rolldown: { entry: "entry.js", outfile: "output.js" },
 	rspack: { entry: "entry.js", outfile: "output.js" },
 };
+
 const inputServer = {
 	farm: { entry: "entry.server.js", outfile: "output.server.js" },
 	webpack: { entry: "entry.server.js", outfile: "output.server.js" },
@@ -53,6 +54,16 @@ const inputServer = {
 	rollup: { entry: "entry.server.js", outfile: "output.server.js" },
 	rolldown: { entry: "entry.server.js", outfile: "output.server.js" },
 	rspack: { entry: "entry.server.js", outfile: "output.server.js" },
+};
+
+const inputClient = {
+	farm: { entry: "entry.client.js", outfile: "output.client.js" },
+	webpack: { entry: "entry.client.js", outfile: "output.client.js" },
+	vite: { entry: "entry.client.js", outfile: "output.client.js" },
+	esbuild: { entry: "entry.client.js", outfile: "output.client.js" },
+	rollup: { entry: "entry.client.js", outfile: "output.client.js" },
+	rolldown: { entry: "entry.client.js", outfile: "output.client.js" },
+	rspack: { entry: "entry.client.js", outfile: "output.client.js" },
 };
 
 const expectations = {
@@ -90,6 +101,44 @@ const expectations = {
 		bundler: "rspack",
 		index: 1,
 		bundlerModuleName: "webpack://js/./node_modules/.virtual/%40env",
+	},
+};
+
+const expectationsClient = {
+	webpack: {
+		bundler: "webpack",
+		index: 1,
+		bundlerModuleName: "webpack://js/./_virtual_%40env%2Fclient",
+	},
+	vite: {
+		bundler: "vite",
+		index: 0,
+		bundlerModuleName: "../../../../@env/client",
+	},
+	esbuild: {
+		bundler: "esbuild",
+		index: 0,
+		bundlerModuleName: "unplugin-environment:@env/client",
+	},
+	farm: {
+		bundler: "farm",
+		index: 1,
+		bundlerModuleName: "/@env/client",
+	},
+	rollup: {
+		bundler: "rollup",
+		index: 0,
+		bundlerModuleName: "../../../../@env/client",
+	},
+	rolldown: {
+		bundler: "rolldown",
+		index: 0,
+		bundlerModuleName: "../../../../@env/client",
+	},
+	rspack: {
+		bundler: "rspack",
+		index: 1,
+		bundlerModuleName: "webpack://js/./node_modules/.virtual/%40env%2Fclient",
 	},
 };
 
@@ -214,6 +263,32 @@ describe.sequential.each([
 		expectations: expectationsServer,
 		isServer: true,
 	},
+	{
+		plugin: Environment,
+		pluginName: "unplugin-environment",
+		pluginOption: {
+			client: {
+				match: "CLIENT_APP",
+				schema: {
+					CLIENT_APP_NAME: z.string(),
+				},
+			},
+			server: {
+				match: "SERVER_APP",
+				schema: {
+					SERVER_APP_NAME: z.string(),
+				},
+			},
+		},
+		env: {
+			CLIENT_APP_NAME: "test",
+			SERVER_APP_NAME: "test",
+		},
+		input: inputClient,
+		expectations: expectationsClient,
+		isServer: true,
+		isAccessClientEnv: true,
+	},
 ])(
 	"[E2E] $pluginName has been created virtual module",
 	({
@@ -224,6 +299,7 @@ describe.sequential.each([
 		input,
 		expectations,
 		isServer,
+		isAccessClientEnv,
 	}) => {
 		const isSkipped = (n: string) => !unSkipped.includes(n);
 		const readSourcemap = (meta: string) =>
@@ -240,13 +316,16 @@ describe.sequential.each([
 				.then(JSON.parse);
 
 		const coreOption = EnvironmentCore.getOptions(pluginOption);
-		const expected = isServer
-			? EnvironmentCore.createModuleEnvServer(env, coreOption.server as Options)
-					.code
-			: EnvironmentCore.createModuleEnv(
-					env,
-					coreOption?.client ? coreOption.client : (coreOption as Options),
-				).code;
+		const expected =
+			isServer && !isAccessClientEnv
+				? EnvironmentCore.createModuleEnvServer(
+						env,
+						coreOption.server as Options,
+					).code
+				: EnvironmentCore.createModuleEnv(
+						env,
+						coreOption?.client ? coreOption.client : (coreOption as Options),
+					).code;
 		const checkExpectations = async ({ bundler, index, bundlerModuleName }) => {
 			const sourcemap = await readSourcemap(bundler);
 			const virtualModule = sourcemap.sourcesContent[index];
