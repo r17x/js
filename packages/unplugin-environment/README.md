@@ -308,12 +308,12 @@ console.log(env.PREFIX_APP_NAME)
 
 ### Client/Server Environment
 
-Use the `client` and `server` options for client/server environment.
+To handle environment variables separately for client and server, use the client and server options. This allows for precise control over which variables are accessible in different environments.
+
 > [!NOTE]
-> You cannot use module `@env` when using `client` and `server` options. It MUST be use with module `@env/client` for client environment and `@env/server` for server environment.
+> When using the client and server options, you cannot access environment variables through the @env module. Instead, use `@env/client` for client-side variables and `@env/server` for server-side variables by default.
 
-
-
+Example configuration:
 ```ts
 Environment({
     client: {
@@ -327,6 +327,30 @@ Environment({
         schema: {
             SERVER_APP_DB_URL: z.string().min(1).default('postgres://localhost:5432/mydb'),
         }
+    },
+})
+```
+
+If you'd like to change the default module names `@env/client` and `@env/server`, you can use the optional `moduleEnvName` key to define a custom module name for accessing the environment variables.
+
+> [!CAUTION]
+> When customizing moduleEnvName for client and server, ensure the module names are different. Using the same name for both client and server can cause conflicts and unpredictable behavior.
+
+```ts
+Environment({
+    client: {
+        match: 'CLIENT_',
+        schema: {
+            CLIENT_APP_NAME: z.string().min(1).default('My App'),
+        },
+        moduleEnvName: '@myenv/client', // Optional: Customize the client module name
+    },
+    server: {
+        match: 'SERVER_',
+        schema: {
+            SERVER_APP_DB_URL: z.string().min(1).default('postgres://localhost:5432/mydb'),
+        },
+        moduleEnvName: '@myenv/server', // Optional: Customize the server module name
     },
 })
 ```
