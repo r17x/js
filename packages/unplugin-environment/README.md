@@ -32,6 +32,7 @@
     * [1. Configuration](#configuration)
         * [1.a Schema Validation](#schema-validation) `👍 Recommended`
         * [1.b Intellisense with TypeScript](#intellisense-with-typescript) `👍 Recommended`
+        * [1.c Client/Server Environment](#clientserver-environment) `👍 Recommended` for SSR, SSG, and other client/server environment.
     * [2. Accessing Environment Variables](#accessing-environment-variables)
     * [3. Done](#)
 * [💡 Acknowledgements](#acknowledgements)
@@ -252,7 +253,7 @@ Environment({
     match: 'PREFIX_', // or ['PREFIX_', 'PREFIX2_']
     schema: {
         PREFIX_APP_NAME: z.string().min(1).default('My App'),
-        PREFIX_APP_PORT: z.string().min(1).default('3000').transform(n => n | 0).pipe(z.number())
+        PREFIX_APP_PORT: z.coerce.number().min(1).default(3000),
     },
 })
 ```
@@ -300,6 +301,51 @@ import { env } from 'MYENV'
 
 console.log(env.PREFIX_APP_NAME)
 ```
+
+<div align="right">
+    <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
+</div>
+
+### Client/Server Environment
+
+Use the `client` and `server` options for client/server environment.
+> [!NOTE]
+> You cannot use module `@env` when using `client` and `server` options. It MUST be use with module `@env/client` for client environment and `@env/server` for server environment.
+
+
+
+```ts
+Environment({
+    client: {
+        match: 'CLIENT_',
+        schema: {
+            CLIENT_APP_NAME: z.string().min(1).default('My App'),
+        },
+    },
+    server: {
+        match: 'SERVER_',
+        schema: {
+            SERVER_APP_DB_URL: z.string().min(1).default('postgres://localhost:5432/mydb'),
+        }
+    },
+})
+```
+
+#### Accessing Client/Server Environment
+
+```ts
+// client environment
+import { env } from '@env/client'
+
+env.CLIENT_APP_NAME // typed with string
+
+// server environment
+import { env } from '@env/server'
+
+env.SERVER_APP_DB_URL // typed with string
+
+```
+
 
 <div align="right">
     <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
