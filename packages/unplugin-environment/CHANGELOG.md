@@ -1,3 +1,13 @@
+## unplugin-environment [1.3.0](https://github.com/r17x/js/compare/unplugin-environment@1.2.5...unplugin-environment@1.3.0) (2024-10-03)
+
+### Features
+
+* **client-server:** add client and server configuration ([#33](https://github.com/r17x/js/issues/33)) ([b621357](https://github.com/r17x/js/commit/b62135721fa7c95b058cae62f5f49d7e87528e5d))
+
+### Documentation
+
+* write better readme ([a043943](https://github.com/r17x/js/commit/a0439436ffac0d9b920f25bf079c2e645f944f61))
+
 ## unplugin-environment [1.2.5](https://github.com/r17x/js/compare/unplugin-environment@1.2.4...unplugin-environment@1.2.5) (2024-09-30)
 
 ### Bug Fixes
