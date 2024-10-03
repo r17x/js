@@ -20,9 +20,7 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx}": ["biome check --fix", "vitest related --run"],
-		"*": [
-			"biome check --no-errors-on-unmatched --files-ignore-unknown=true --write"
-		]
+		"*": ["biome check  --write"]
 	},
 	"dependencies": {
 		"@anolilab/multi-semantic-release": "^1.1.3",

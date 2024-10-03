@@ -20,42 +20,189 @@ import {
 } from "vitest";
 import { z } from "zod";
 
+import {
+	type Options,
+	OptionsClientServer,
+} from "unplugin-environment/core/types";
 import { type RspackOptions, build, webpackVersion } from "./utils";
+
+const plugins = {
+	farm: EnvironmentFarm,
+	webpack: EnvironmentWebpack,
+	vite: EnvironmentVite,
+	esbuild: EnvironmentEsbuild,
+	rollup: EnvironmentRollup,
+	rolldown: EnvironmentRolldown,
+	rspack: EnvironmentRspack,
+};
+
+const input = {
+	farm: { entry: "entry.js", outfile: "output.js" },
+	webpack: { entry: "entry.js", outfile: "output.js" },
+	vite: { entry: "entry.js", outfile: "output.js" },
+	esbuild: { entry: "entry.js", outfile: "output.js" },
+	rollup: { entry: "entry.js", outfile: "output.js" },
+	rolldown: { entry: "entry.js", outfile: "output.js" },
+	rspack: { entry: "entry.js", outfile: "output.js" },
+};
+
+const inputServer = {
+	farm: { entry: "entry.server.js", outfile: "output.server.js" },
+	webpack: { entry: "entry.server.js", outfile: "output.server.js" },
+	vite: { entry: "entry.server.js", outfile: "output.server.js" },
+	esbuild: { entry: "entry.server.js", outfile: "output.server.js" },
+	rollup: { entry: "entry.server.js", outfile: "output.server.js" },
+	rolldown: { entry: "entry.server.js", outfile: "output.server.js" },
+	rspack: { entry: "entry.server.js", outfile: "output.server.js" },
+};
+
+const inputClient = {
+	farm: { entry: "entry.client.js", outfile: "output.client.js" },
+	webpack: { entry: "entry.client.js", outfile: "output.client.js" },
+	vite: { entry: "entry.client.js", outfile: "output.client.js" },
+	esbuild: { entry: "entry.client.js", outfile: "output.client.js" },
+	rollup: { entry: "entry.client.js", outfile: "output.client.js" },
+	rolldown: { entry: "entry.client.js", outfile: "output.client.js" },
+	rspack: { entry: "entry.client.js", outfile: "output.client.js" },
+};
+
+const expectations = {
+	webpack: {
+		bundler: "webpack",
+		index: 1,
+		bundlerModuleName: "webpack://js/./_virtual_%40env",
+	},
+	vite: {
+		bundler: "vite",
+		index: 0,
+		bundlerModuleName: "../../../../@env",
+	},
+	esbuild: {
+		bundler: "esbuild",
+		index: 0,
+		bundlerModuleName: "unplugin-environment:@env",
+	},
+	farm: {
+		bundler: "farm",
+		index: 0,
+		bundlerModuleName: "/@env",
+	},
+	rollup: {
+		bundler: "rollup",
+		index: 0,
+		bundlerModuleName: "../../../../@env",
+	},
+	rolldown: {
+		bundler: "rolldown",
+		index: 0,
+		bundlerModuleName: "../../../../@env",
+	},
+	rspack: {
+		bundler: "rspack",
+		index: 1,
+		bundlerModuleName: "webpack://js/./node_modules/.virtual/%40env",
+	},
+};
+
+const expectationsClient = {
+	webpack: {
+		bundler: "webpack",
+		index: 1,
+		bundlerModuleName: "webpack://js/./_virtual_%40env%2Fclient",
+	},
+	vite: {
+		bundler: "vite",
+		index: 0,
+		bundlerModuleName: "../../../../@env/client",
+	},
+	esbuild: {
+		bundler: "esbuild",
+		index: 0,
+		bundlerModuleName: "unplugin-environment:@env/client",
+	},
+	farm: {
+		bundler: "farm",
+		index: 1,
+		bundlerModuleName: "/@env/client",
+	},
+	rollup: {
+		bundler: "rollup",
+		index: 0,
+		bundlerModuleName: "../../../../@env/client",
+	},
+	rolldown: {
+		bundler: "rolldown",
+		index: 0,
+		bundlerModuleName: "../../../../@env/client",
+	},
+	rspack: {
+		bundler: "rspack",
+		index: 1,
+		bundlerModuleName: "webpack://js/./node_modules/.virtual/%40env%2Fclient",
+	},
+};
+
+const expectationsServer = {
+	webpack: {
+		bundler: "webpack",
+		index: 0,
+		bundlerModuleName: "webpack://js/./_virtual_%40env%2Fserver",
+	},
+	vite: {
+		bundler: "vite",
+		index: 0,
+		bundlerModuleName: "../../../../@env/server",
+	},
+	esbuild: {
+		bundler: "esbuild",
+		index: 0,
+		bundlerModuleName: "unplugin-environment:@env/server",
+	},
+	farm: {
+		bundler: "farm",
+		index: 1,
+		bundlerModuleName: "/@env/server",
+	},
+	rollup: {
+		bundler: "rollup",
+		index: 0,
+		bundlerModuleName: "../../../../@env/server",
+	},
+	rolldown: {
+		bundler: "rolldown",
+		index: 0,
+		bundlerModuleName: "../../../../@env/server",
+	},
+	rspack: {
+		bundler: "rspack",
+		index: 0,
+		bundlerModuleName: "webpack://js/./node_modules/.virtual/%40env%2Fserver",
+	},
+};
 
 const unSkipped = [
 	"farm",
-	"webpack",
+	"ebpack",
 	"vite",
 	"esbuild",
 	"rollup",
 	"rolldown",
 	"rspack",
+	"webpack",
 ];
 
 describe.sequential.each([
 	{
-		plugin: {
-			farm: EnvironmentFarm,
-			webpack: EnvironmentWebpack,
-			vite: EnvironmentVite,
-			esbuild: EnvironmentEsbuild,
-			rollup: EnvironmentRollup,
-			rolldown: EnvironmentRolldown,
-			rspack: EnvironmentRspack,
-		},
+		plugin: plugins,
 		pluginName: "unplugin-environment",
 		pluginOption: "REACT_APP",
+		env: { REACT_APP_NAME: "test" },
+		input,
+		expectations,
+		isServer: false,
 	},
 	{
-		plugin: {
-			farm: EnvironmentFarm,
-			webpack: EnvironmentWebpack,
-			vite: EnvironmentVite,
-			esbuild: EnvironmentEsbuild,
-			rollup: EnvironmentRollup,
-			rolldown: EnvironmentRolldown,
-			rspack: EnvironmentRspack,
-		},
+		plugin: plugins,
 		pluginName: "unplugin-environment",
 		pluginOption: {
 			match: "REACT_APP",
@@ -63,11 +210,19 @@ describe.sequential.each([
 				REACT_APP_NAME: z.string(),
 			},
 		},
+		env: { REACT_APP_NAME: "test" },
+		input,
+		expectations,
+		isServer: false,
 	},
 	{
 		plugin: Environment,
 		pluginName: "unplugin-environment",
 		pluginOption: "REACT_APP",
+		env: { REACT_APP_NAME: "test" },
+		input,
+		expectations,
+		isServer: false,
 	},
 	{
 		plugin: Environment,
@@ -78,21 +233,105 @@ describe.sequential.each([
 				REACT_APP_NAME: z.string(),
 			},
 		},
+		env: { REACT_APP_NAME: "test" },
+		input,
+		expectations,
+		isServer: false,
+	},
+	{
+		plugin: Environment,
+		pluginName: "unplugin-environment",
+		pluginOption: {
+			client: {
+				match: "CLIENT_APP",
+				schema: {
+					CLIENT_APP_NAME: z.string(),
+				},
+			},
+			server: {
+				match: "SERVER_APP",
+				schema: {
+					SERVER_APP_NAME: z.string(),
+				},
+			},
+		},
+		env: {
+			CLIENT_APP_NAME: "test",
+			SERVER_APP_NAME: "test",
+		},
+		input: inputServer,
+		expectations: expectationsServer,
+		isServer: true,
+	},
+	{
+		plugin: Environment,
+		pluginName: "unplugin-environment",
+		pluginOption: {
+			client: {
+				match: "CLIENT_APP",
+				schema: {
+					CLIENT_APP_NAME: z.string(),
+				},
+			},
+			server: {
+				match: "SERVER_APP",
+				schema: {
+					SERVER_APP_NAME: z.string(),
+				},
+			},
+		},
+		env: {
+			CLIENT_APP_NAME: "test",
+			SERVER_APP_NAME: "test",
+		},
+		input: inputClient,
+		expectations: expectationsClient,
+		isServer: true,
+		isAccessClientEnv: true,
 	},
 ])(
 	"[E2E] $pluginName has been created virtual module",
-	({ plugin, pluginName, pluginOption }) => {
+	({
+		plugin,
+		pluginName,
+		pluginOption,
+		env,
+		input,
+		expectations,
+		isServer,
+		isAccessClientEnv,
+	}) => {
 		const isSkipped = (n: string) => !unSkipped.includes(n);
 		const readSourcemap = (meta: string) =>
 			fs.promises
-				.readFile(path.resolve(__dirname, `test.out/${meta}/output.js.map`), {
-					encoding: "utf8",
-				})
+				.readFile(
+					path.resolve(
+						__dirname,
+						`test.out/${meta}/${input[meta].outfile}.map`,
+					),
+					{
+						encoding: "utf8",
+					},
+				)
 				.then(JSON.parse);
 
-		const env = { REACT_APP_NAME: "test" };
 		const coreOption = EnvironmentCore.getOptions(pluginOption);
-		const expected = EnvironmentCore.createModuleEnv(env, coreOption).code;
+		const expected =
+			isServer && !isAccessClientEnv
+				? EnvironmentCore.createModuleEnvServer(
+						env,
+						coreOption.server as Options,
+					).code
+				: EnvironmentCore.createModuleEnv(
+						env,
+						coreOption?.client ? coreOption.client : (coreOption as Options),
+					).code;
+		const checkExpectations = async ({ bundler, index, bundlerModuleName }) => {
+			const sourcemap = await readSourcemap(bundler);
+			const virtualModule = sourcemap.sourcesContent[index];
+			expect(sourcemap.sources[index]).toBe(bundlerModuleName);
+			expect(virtualModule).toBe(expected);
+		};
 
 		beforeAll(() => {
 			fs.rmSync(path.resolve(__dirname, "test.out"), {
@@ -116,11 +355,11 @@ describe.sequential.each([
 			`build ${pluginName} with webpack`,
 			async () => {
 				const webpack4Options = {
-					entry: path.resolve(__dirname, "test.src/entry.js"),
+					entry: path.resolve(__dirname, "test.src", input.webpack.entry),
 					cache: false,
 					output: {
 						path: path.resolve(__dirname, "test.out/webpack"),
-						filename: "output.js",
+						filename: input.webpack.outfile,
 						libraryTarget: "commonjs",
 					},
 					plugins: [plugin.webpack(pluginOption)],
@@ -128,12 +367,12 @@ describe.sequential.each([
 				};
 
 				const webpack5Options = {
-					entry: path.resolve(__dirname, "test.src/entry.js"),
+					entry: path.resolve(__dirname, "test.src", input.webpack.entry),
 					plugins: [plugin.webpack(pluginOption)],
 					devtool: "source-map",
 					output: {
 						path: path.resolve(__dirname, "test.out/webpack"),
-						filename: "output.js",
+						filename: input.webpack.outfile,
 						library: {
 							type: "commonjs",
 						},
@@ -147,10 +386,7 @@ describe.sequential.each([
 					);
 				});
 
-				const sourcemap = await readSourcemap("webpack");
-				const virtualModule = sourcemap.sourcesContent[1];
-				expect(sourcemap.sources[1]).toBe("webpack://js/./_virtual_%40env");
-				expect(virtualModule).toBe(expected);
+				await checkExpectations(expectations.webpack);
 			},
 		);
 
@@ -160,9 +396,9 @@ describe.sequential.each([
 				plugins: [plugin.vite(pluginOption)],
 				build: {
 					lib: {
-						entry: path.resolve(__dirname, "test.src/entry.js"),
+						entry: path.resolve(__dirname, "test.src", input.vite.entry),
 						name: "TestLib",
-						fileName: "output",
+						fileName: input.vite.outfile.replace(".js", ""),
 						formats: ["cjs"],
 					},
 					outDir: path.resolve(__dirname, "test.out/vite"),
@@ -170,28 +406,28 @@ describe.sequential.each([
 				},
 			});
 
-			const sourcemap = await readSourcemap("vite");
-			const virtualModule = sourcemap.sourcesContent[0];
-			expect(sourcemap.sources[0]).toBe("../../../../@env");
-			expect(virtualModule).toBe(expected);
+			await checkExpectations(expectations.vite);
 		});
 
 		it.skipIf(isSkipped("esbuild"))(
 			`build ${pluginName} with esbuild`,
 			async () => {
 				await build.esbuild({
-					entryPoints: [path.resolve(__dirname, "test.src/entry.js")],
+					entryPoints: [
+						path.resolve(__dirname, "test.src", input.esbuild.entry),
+					],
 					plugins: [plugin.esbuild(pluginOption)],
 					bundle: true, // actually traverse imports
-					outfile: path.resolve(__dirname, "test.out/esbuild/output.js"),
+					outfile: path.resolve(
+						__dirname,
+						"test.out/esbuild",
+						input.esbuild.outfile,
+					),
 					format: "cjs",
 					sourcemap: true,
 				});
 
-				const sourcemap = await readSourcemap("esbuild");
-				const virtualModule = sourcemap.sourcesContent[0];
-				expect(sourcemap.sources[0]).toBe("unplugin-environment:@env");
-				expect(virtualModule).toBe(expected);
+				await checkExpectations(expectations.esbuild);
 			},
 		);
 
@@ -205,19 +441,16 @@ describe.sequential.each([
 					persistentCache: false,
 					sourcemap: "all",
 					input: {
-						output: path.resolve(__dirname, "test.src/entry.js"),
+						output: path.resolve(__dirname, "test.src", input.farm.entry),
 					},
 					output: {
-						entryFilename: "output.js",
+						entryFilename: input.farm.outfile,
 						path: path.resolve(__dirname, "test.out/farm"),
 					},
 				},
 			});
 
-			const sourcemap = await readSourcemap("farm");
-			const virtualModule = sourcemap.sourcesContent[0];
-			expect(sourcemap.sources[0]).toBe("/@env");
-			expect(virtualModule).toBe(expected);
+			await checkExpectations(expectations.farm);
 		});
 
 		it.skipIf(isSkipped("rollup"))(
@@ -226,21 +459,22 @@ describe.sequential.each([
 				await build
 					.rollup({
 						plugins: [plugin.rollup(pluginOption)],
-						input: path.resolve(__dirname, "test.src/entry.js"),
+						input: path.resolve(__dirname, "test.src", input.rollup.entry),
 					})
 					.then((rollupBuild) =>
 						rollupBuild.write({
-							file: path.resolve(__dirname, "test.out/rollup/output.js"),
+							file: path.resolve(
+								__dirname,
+								"test.out/rollup",
+								input.rollup.outfile,
+							),
 							format: "cjs",
 							exports: "named",
 							sourcemap: true,
 						}),
 					);
 
-				const sourcemap = await readSourcemap("rollup");
-				const virtualModule = sourcemap.sourcesContent[0];
-				expect(sourcemap.sources[0]).toBe("../../../../@env");
-				expect(virtualModule).toBe(expected);
+				await checkExpectations(expectations.rollup);
 			},
 		);
 
@@ -250,7 +484,7 @@ describe.sequential.each([
 				await build
 					.rolldown({
 						plugins: [plugin.rolldown(pluginOption)],
-						input: path.resolve(__dirname, "test.src/entry.js"),
+						input: path.resolve(__dirname, "test.src", input.rolldown.entry),
 						treeshake: false,
 					})
 					.then((rolldownBuild) =>
@@ -259,14 +493,11 @@ describe.sequential.each([
 							dir: path.resolve(__dirname, "test.out/rolldown"),
 							exports: "named",
 							sourcemap: true,
-							entryFileNames: "output.js",
+							entryFileNames: input.rolldown.outfile,
 						}),
 					);
 
-				const sourcemap = await readSourcemap("rolldown");
-				const virtualModule = sourcemap.sourcesContent[0];
-				expect(sourcemap.sources[0]).toBe("../../../../@env");
-				expect(virtualModule).toBe(expected);
+				await checkExpectations(expectations.rolldown);
 			},
 		);
 
@@ -274,18 +505,19 @@ describe.sequential.each([
 			`build ${pluginName} with rspack`,
 			async () => {
 				const rspackOptions: RspackOptions = {
-					entry: path.resolve(__dirname, "test.src/entry.js"),
+					entry: path.resolve(__dirname, "test.src", input.rspack.entry),
 					plugins: [plugin.rspack(pluginOption)],
 					devtool: "source-map",
 					output: {
 						path: path.resolve(__dirname, "test.out/rspack"),
-						filename: "output.js",
+						filename: input.rspack.outfile,
 						library: {
 							type: "commonjs",
 						},
 					},
 				};
 				const compiler = build.rspack(rspackOptions);
+
 				await new Promise((resolve, reject) => {
 					compiler.run((err, stats) => {
 						if (err || stats?.hasErrors()) {
@@ -295,14 +527,8 @@ describe.sequential.each([
 						compiler.close(resolve);
 					});
 				});
-				const sourcemap = await readSourcemap("rspack");
-				const virtualModule = sourcemap.sourcesContent[1];
-				expect(sourcemap.sources[1]).toBe(
-					"webpack://js/./node_modules/.virtual/%40env",
-				);
-				expect(virtualModule).toBe(
-					`export const env = ${JSON.stringify({ REACT_APP_NAME: "test" })}`,
-				);
+
+				await checkExpectations(expectations.rspack);
 			},
 		);
 	},

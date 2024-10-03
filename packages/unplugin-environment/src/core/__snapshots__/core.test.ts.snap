@@ -1,21 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`uplugin-environment:core > [DTS] valid create module type definition 1`] = `
-"declare module "@myenv" {
-export const env: {
-    REACT_APP_NAME: string;
-    REACT_APP_VERSION: string;
-    REACT_APP_DURATION?: string;
-    REACT_APP_PORT: number;
-    REACT_APP_DATA: {
-        age: number;
-        name: string;
-    };
-    REACT_APP_AGE: number;
-}
-}"
-`;
-
 exports[`uplugin-environment:core > only for knowledge 1`] = `
 "{
     [x: string]: string;
