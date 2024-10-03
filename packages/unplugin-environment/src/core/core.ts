@@ -1,5 +1,5 @@
 import path from "path";
-import { A, D, F, G, S, pipe } from "@mobily/ts-belt";
+import { A, D, F, G, O, S, pipe } from "@mobily/ts-belt";
 import { z } from "zod";
 import { name as pkgName, version as pkgVersion } from "../../package.json";
 import { printTypeDefinition, zodToTs } from "./ast";
@@ -11,6 +11,7 @@ import type {
 	UOptions,
 } from "./types";
 
+const toJsonString = <T>(a: T) => JSON.stringify(a);
 const toUndefined = () => undefined;
 const exclaim = S.startsWith("!");
 const dropHead = S.sliceToEnd(1);
@@ -62,18 +63,21 @@ export const getOptions = (o: PluginOption): UOptions =>
 	option.or(clientServerOption).parse(o) as UOptions; // using as for type but don't worries, we have power of `zod`.
 
 const isClientServer = (o: UOptions): o is OptionsClientServer =>
-	clientServerOption.safeParse(o).success;
+	[
+		O.fromNullable((o as Partial<OptionsClientServer>)?.client),
+		O.fromNullable((o as Partial<OptionsClientServer>)?.server),
+	].every(O.isSome);
 
 export const mapOptions = <A>(
 	o: UOptions,
 	{
-		single: a,
-		clientServer: b,
+		single,
+		clientServer,
 	}: {
 		single: (a: Options) => A;
 		clientServer: (a: OptionsClientServer) => A;
 	},
-) => (isClientServer(o) ? b(o) : a(o));
+) => (isClientServer(o) ? clientServer(o) : single(o));
 
 const filterEnv = (env: Record<string, string>, m: Match) => {
 	const ms = G.isString(m) ? [m] : m;
@@ -99,13 +103,10 @@ export const createModuleEnv = (
 	env: Record<string, string>,
 	options: Options,
 ) => ({
-	code: `export const env = ${JSON.stringify(getEnv(env, options))}`,
+	code: `export const env = ${toJsonString(getEnv(env, options))}`,
 });
 
-export const createModuleEnvServer = (
-	env: Record<string, string>,
-	options: Options,
-) => ({
+export const createModuleEnvServer = () => ({
 	code: `
   const isServer = (() => {
     const isBrowser = typeof window !== "undefined" 
@@ -116,12 +117,9 @@ export const createModuleEnvServer = (
     return !isBrowser 
   })()
 
-  const _env = (() => process?.env || {})
-
-  const env = new Proxy(_env, {
+  const env = new Proxy(process?.env || {}, {
     get(target, key){
-      if (typeof prop !== "string") return undefined;
-      const serverKeys = ${JSON.stringify(D.keys(filterEnv(env, options.match)))};
+      if (typeof key !== "string") return undefined;
       return target[key];
     }
   })
@@ -135,13 +133,15 @@ export const createModuleDTS = (
 	options: Options,
 ) =>
 	pipe(
-		D.keys(filterEnv(env, options.match)),
+		F.ifElse(filterEnv(env, options.match), D.isEmpty, () => [], D.keys),
 		A.reduce(D.makeEmpty<Record<string, z.ZodType>>(), (a, b) =>
 			D.set(a, b, z.string().optional()),
 		),
 		(o) => z.object(o),
 		(zo) =>
-			zo.merge(z.object(D.map(options.schema.shape, (v) => v._def.out || v))),
+			zo.merge(
+				z.object(D.map(options.schema?.shape || {}, (v) => v._def.out || v)),
+			),
 		zodToTs,
 		({ node }) => node,
 		printTypeDefinition,
@@ -183,7 +183,7 @@ export const load = (env: Record<string, string>, options: UOptions) =>
 					Promise.resolve(
 						id === o.client.moduleEnvName
 							? createModuleEnv(env, o.client)
-							: createModuleEnvServer(env, o.server),
+							: createModuleEnvServer(),
 					),
 				toUndefined,
 			),

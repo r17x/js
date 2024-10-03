@@ -1,19 +1,21 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import { F } from "@mobily/ts-belt";
+import { F, G } from "@mobily/ts-belt";
 import { config as dotenvConfig } from "dotenv";
 import type { UnpluginFactory } from "unplugin";
 import * as Core from "./core";
 import { log } from "./logger";
 import type { PluginOption } from "./types";
 
-export const unpluginFactory: UnpluginFactory<PluginOption> = (o) => {
-	const options = Core.getOptions(o);
+export const unpluginFactory: UnpluginFactory<PluginOption> = (opt) => {
+	const options = Core.getOptions(opt);
 	const isProduction =
 		["true", "1"].includes(process?.env?.CI || "") &&
 		process?.env?.NODE_ENV !== "development";
 
-	const env = process.env as Record<string, string>;
+	const env = G.isObject<Record<string, string>>(process?.env)
+		? process.env
+		: {};
 	/**
 	 * NOTE:
 	 * Vite not load env file automatically until user set configuration for env.
@@ -26,20 +28,31 @@ export const unpluginFactory: UnpluginFactory<PluginOption> = (o) => {
 	 */
 	const writer = () =>
 		import("fs/promises").then(async (fs) => {
+			const dtsPath = path.resolve(
+				path.dirname(fileURLToPath(import.meta.url)),
+				"env.d.ts",
+			);
+			const dtsContent = Core.mapOptions(options, {
+				single: (o) => Core.createModuleDTS(env, o),
+				clientServer: (o) =>
+					[
+						Core.createModuleDTS(env, o.client),
+						"",
+						Core.createModuleDTS(env, o.server),
+					].join("\n"),
+			});
 			fs.writeFile(
-				path.resolve(path.dirname(fileURLToPath(import.meta.url)), "env.d.ts"),
+				dtsPath,
 				// it will be handle existing user configuration and client/server configuration.
 				// for client/server configuration, we will generate on each and merged into one file `env.d.ts`.
-				Core.mapOptions(options, {
-					single: (o) => Core.createModuleDTS(env, o),
-					clientServer: (o) =>
-						[
-							Core.createModuleDTS(env, o.client),
-							"",
-							Core.createModuleDTS(env, o.server),
-						].join("\n"),
-				}),
-			);
+				dtsContent,
+			).then(() => {
+				log({
+					kind: "info",
+					message: "✓ Generated env.d.ts",
+					prefix: "unplugin-environment",
+				});
+			});
 		});
 
 	const logError = (e: Error) => {
@@ -87,9 +100,17 @@ export const unpluginFactory: UnpluginFactory<PluginOption> = (o) => {
 		resolveId,
 		loadInclude,
 		load,
-		watchChange: Core.watchChange([".env"], () => {
-			dotenvConfig({ processEnv: env });
-		}),
+		watchChange: Core.watchChange(
+			[
+				".env",
+				// ideally, user could add pattern file for load env file (`.env.*`)
+				// to watch and update the `env` object.
+			],
+			() => {
+				dotenvConfig({ processEnv: env });
+				build();
+			},
+		),
 		buildStart: build,
 	};
 };
