@@ -82,17 +82,20 @@ export const unpluginFactory: UnpluginFactory<PluginOption> = (opt) => {
 	const load = Core.load(env, options);
 
 	// use for validation `schema` and `moduleEnvName` is use for generate `env.d.ts` file.
-	const build = Core.mapOptions(options, {
-		single: (o) => async () => {
-			await Core.build(env, o).then(writer).catch(logError);
-		},
-		clientServer: (o) => async () => {
-			await Promise.all([
-				Core.build(env, o.client).then(writer),
-				Core.build(env, o.server).then(writer),
-			]).catch(logError);
-		},
-	});
+	const build = F.memoizeWithKey(
+		() => JSON.stringify({ ...options, ...env }),
+		Core.mapOptions(options, {
+			single: (o) => async () => {
+				await Core.build(env, o).then(writer).catch(logError);
+			},
+			clientServer: (o) => async () => {
+				await Promise.all([
+					Core.build(env, o.client).then(writer),
+					Core.build(env, o.server).then(writer),
+				]).catch(logError);
+			},
+		}),
+	);
 
 	return {
 		name: "unplugin-environment",
