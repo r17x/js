@@ -19,8 +19,8 @@
 		"lint:test": "echo \"No lint:test script specified\""
 	},
 	"lint-staged": {
-		"*.{ts,tsx}": ["biome check --fix", "vitest related --run"],
-		"*": ["biome check  --write"]
+		"*.{ts,tsx}": ["biome check --fix", "vitest related --run", "git add"],
+		"*": ["biome check --write", "git add"]
 	},
 	"dependencies": {
 		"@anolilab/multi-semantic-release": "^1.1.3",

@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`uplugin-environment:core > only for knowledge 1`] = `
+"{
+    [x: string]: string;
+}"
+`;
+
+exports[`uplugin-environment:core > only for knowledge 2`] = `
+"{
+    REACT_APP_NAME: string;
+    REACT_APP_VERSION: string;
+    REACT_APP_AGE: number;
+}"
+`;
+
+exports[`uplugin-environment:core > valid merge zod schema 1`] = `
+"{
+    REACT_APP_NAME?: string | undefined;
+    REACT_APP_VERSION: string;
+}"
+`;

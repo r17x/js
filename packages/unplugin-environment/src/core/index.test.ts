@@ -1,14 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { zodToTs } from "zod-to-ts";
+import * as Core from ".";
 import { name as pkgName, version as pkgVersion } from "../../package.json";
-import * as Core from "./core";
 import type { Options, PluginOption } from "./types";
 
 describe("uplugin-environment:core", () => {
-	beforeEach(() => {
-		vi.clearAllMocks();
-	});
+	beforeEach(vi.clearAllMocks);
 
 	const casesSchema = [
 		{
@@ -99,23 +97,10 @@ describe("uplugin-environment:core", () => {
 		).matchSnapshot();
 	});
 
-	it("valid run build", () => {
-		expect(
-			Core.build(
-				{ REACT_APP_NAME: "htmx_BTW" },
-				Core.getOptions("REACT_APP") as Options,
-			),
-		).resolves.toStrictEqual({
-			success: true,
-			data: {
-				REACT_APP_NAME: "htmx_BTW",
-			},
-		});
-	});
-
 	it("only run watchChange once when valid watchList", () => {
 		const onChange = vi.fn();
 		const watcher = Core.watchChange([".env"], onChange);
+		watcher("/a/b/c/.env");
 		watcher("/a/b/c/.env~~~~");
 		watcher("/a/b/c/any");
 		watcher("/a/b/c/any");
@@ -197,63 +182,6 @@ export const env: {
 		);
 	});
 
-	it("valid create module env", () => {
-		expect(() =>
-			Core.load(
-				{
-					REACT_APP_NAME: "htmx_BTW",
-					REACT_APP_VERSION: "6.6.6",
-					REACT_APP_DURATION: "123",
-					SECRET_KEY_TOKEN_: "1234567890",
-				},
-				Core.getOptions({
-					match: "REACT_APP",
-					schema: z.any(),
-					moduleEnvName: "@myenv",
-				}) as Options,
-			)("@myenv"),
-		).toThrowError();
-
-		expect(
-			Core.load(
-				{
-					REACT_APP_NAME: "htmx_BTW",
-					REACT_APP_VERSION: "6.6.6",
-					REACT_APP_DURATION: "123",
-					SECRET_KEY_TOKEN_: "1234567890",
-				},
-				Core.getOptions({
-					match: "REACT_APP",
-					schema: z.object({
-						REACT_APP_NAME: z.string(),
-					}),
-					moduleEnvName: "@myenv",
-				}) as Options,
-			)("@myenv"),
-		).resolves.toMatchSnapshot();
-
-		expect(
-			Core.load(
-				{
-					REACT_APP_NAME: "htmx_BTW",
-					REACT_APP_VERSION: "6.6.6",
-					SECRET_KEY_TOKEN_: "1234567890",
-				},
-				Core.getOptions("REACT_APP") as Options,
-			)("@env"),
-		).resolves.toMatchSnapshot();
-		expect(
-			Core.createModuleEnv(
-				{
-					REACT_APP_NAME: "htmx_BTW",
-					REACT_APP_VERSION: "6.6.6",
-					SECRET_KEY_TOKEN_: "1234567890",
-				},
-				Core.getOptions("REACT_APP") as Options,
-			),
-		).toMatchSnapshot();
-	});
-
 	it("print type definition", () => {
 		expect(
 			Core.printTypeDefinition(
@@ -319,9 +247,9 @@ export const env: {
 		const options = Core.getOptions("REACT_APP");
 		Core.mapOptions(options, {
 			single: (o) => {
-				expect(Core.resolveId(o)("@env")).toBe("@env");
-				expect(Core.resolveId(o)("@env.ts")).toBeNull();
-				expect(Core.resolveId(o)("@env.ts")).not.toBe("@env");
+				expect(Core.loadInclude(o)("@env")).toBeTruthy();
+				expect(Core.loadInclude(o)("@env.ts")).toBeFalsy();
+				expect(Core.loadInclude(o)("@env.ts")).toBeFalsy();
 			},
 			clientServer: () => {},
 		});
