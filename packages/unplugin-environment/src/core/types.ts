@@ -1,4 +1,6 @@
+import type { UnpluginFactory, UnpluginOptions } from "unplugin";
 import type { ZodObject, ZodRawShape } from "zod";
+
 /**
  * @description Match option defines the prefixes for the environment variables that will be loaded. You can pass a single string, an array of strings for multiple prefixes, or exclude variables using a ! before the prefix.
  * @example
@@ -36,16 +38,16 @@ export type Options = {
 export type OptionsClientServer = ClientServer<Options>;
 export type UOptions = Options | OptionsClientServer;
 
-type SchemaOption = {
+export type SchemaOption = {
 	match: Match;
 	schema: ZodObject<ZodRawShape> | ZodRawShape;
 	/**
-	 * @default '@env'
-	 */
+   @default '@env'
+  */
 	moduleEnvName?: string;
 };
 
-type SchemaClientServerOption = ClientServer<Match | SchemaOption>;
+export type SchemaClientServerOption = ClientServer<Match | SchemaOption>;
 
 /**
  * @example
@@ -81,3 +83,37 @@ type SchemaClientServerOption = ClientServer<Match | SchemaOption>;
  * ```
  */
 export type PluginOption = Match | SchemaOption | SchemaClientServerOption;
+
+export type UnpluginEnvironmentFactory = UnpluginFactory<PluginOption>;
+
+export type GetOptions = (o: PluginOption) => UOptions;
+
+export type MapOptions<A> = {
+	single: (a: Options) => A;
+	clientServer: (a: OptionsClientServer) => A;
+};
+
+export type Env = Record<string, string>;
+
+export type GetEnv = (env: Env, options: Options) => Env;
+
+export type FilterEnv = (env: Env, m: Match) => Env;
+
+export type Code = { code: string };
+
+export type CreateModuleEnv = (env: Env, options: Options) => Code;
+
+export type CreateModuleDTS = (env: Env, options: Options) => string;
+
+export type LoadInclude = (options: Options) => (id: string) => boolean;
+
+type OnChange = (id: string) => void;
+
+export type WatchChange = (watchList: string[], onChange: OnChange) => OnChange;
+
+export type Data = {
+	options: UOptions;
+	env: Env;
+	factory: UnpluginOptions;
+	watchList: string[];
+};

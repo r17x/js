@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import Environment from "unplugin-environment";
-import * as EnvironmentCore from "unplugin-environment/core/core";
+import * as EnvironmentCore from "unplugin-environment/core";
 import EnvironmentEsbuild from "unplugin-environment/esbuild";
 import EnvironmentFarm from "unplugin-environment/farm";
 import EnvironmentRolldown from "unplugin-environment/rolldown";
@@ -20,10 +20,7 @@ import {
 } from "vitest";
 import { z } from "zod";
 
-import {
-	type Options,
-	OptionsClientServer,
-} from "unplugin-environment/core/types";
+import type { Options } from "unplugin-environment/core/types";
 import { type RspackOptions, build, webpackVersion } from "./utils";
 
 const plugins = {
