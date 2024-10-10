@@ -3,9 +3,10 @@ import { fileURLToPath } from "url";
 import { A, D, F, G, R, S, flow, pipe } from "@mobily/ts-belt";
 import { config as dotenvConfig } from "dotenv";
 import * as fs from "fs/promises";
+import * as ts from "typescript";
 import { z } from "zod";
+import { zodToTs } from "zod-to-ts";
 import { name as pkgName, version as pkgVersion } from "../../package.json";
-import { printTypeDefinition, zodToTs } from "./ast";
 import { log } from "./logger";
 import type * as CoreType from "./types";
 import { dropHead, exclaim, toJsonString, toNull, toUndefined } from "./utils";
@@ -124,6 +125,16 @@ export const createModuleEnvServer = () => ({
   export { env }
 `,
 });
+
+const printer = ts.createPrinter({
+	newLine: ts.NewLineKind.LineFeed,
+	omitTrailingSemicolon: true,
+});
+
+const emptySourceFile = ts.createSourceFile("", "", ts.ScriptTarget.Latest);
+
+export const printTypeDefinition = (node: ts.TypeNode) =>
+	printer.printNode(ts.EmitHint.Unspecified, node, emptySourceFile);
 
 export const createModuleDTS: CoreType.CreateModuleDTS = (env, options) =>
 	pipe(
@@ -286,5 +297,3 @@ export const unpluginFactory = flow(
 	R.map(updateFactory),
 	R.mapWithDefault(defaultFactory, (data) => data.factory),
 );
-
-export { printTypeDefinition } from "./ast";
