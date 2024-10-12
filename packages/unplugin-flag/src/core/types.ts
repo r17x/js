@@ -24,6 +24,8 @@ export type PluginOption = Record<string, FlagValue>;
 
 export type UnpluginEnvironmentFactory = UnpluginFactory<PluginOption>;
 
+export type CreateFactory = (options: PluginOption) => UnpluginOptions;
+
 export type Data = {
 	options: PluginOption;
 	factory: UnpluginOptions;
