@@ -20,7 +20,7 @@ const defaultFactory: CoreType.Data["factory"] = {
 // * dead-code elimination by value of record `options`
 //   * handle function as value when return promise binary value
 //   * handle function as value when return binary value
-const createFactory = (_options: CoreType.PluginOption) => defaultFactory;
+const createFactory: CoreType.CreateFactory = (_options) => defaultFactory;
 
 const getOptionsR = (opt: CoreType.PluginOption) =>
 	R.fromExecution(() => option.parse(opt));
