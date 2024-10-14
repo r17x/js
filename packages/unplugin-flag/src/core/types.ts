@@ -5,7 +5,7 @@ export type PromiseLikeBinaryValue = PromiseLike<BinaryValue>;
 
 type UnaryFunction<T> = () => T;
 
-type FlagValue =
+export type FlagValue =
 	| BinaryValue
 	| UnaryFunction<BinaryValue>
 	| UnaryFunction<PromiseLikeBinaryValue>;
@@ -24,9 +24,14 @@ export type PluginOption = Record<string, FlagValue>;
 
 export type UnpluginEnvironmentFactory = UnpluginFactory<PluginOption>;
 
-export type CreateFactory = (options: PluginOption) => UnpluginOptions;
-
 export type Data = {
-	options: PluginOption;
 	factory: UnpluginOptions;
+	flagConfig: PluginOption;
+	options: {
+		moduleFlagName: string;
+	};
 };
+
+export type EliminationFlag = { key: string; value: boolean };
+export type GetOptions = (options: PluginOption) => Data;
+export type CreateFactory = (options: Data) => UnpluginOptions;

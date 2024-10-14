@@ -1,7 +1,7 @@
 <div align="center">
     <h1>unplugin-flag</h1>
     <p>
-        A powerfull plugin for feature flag.
+        A plugin for feature flag.
     </p>
     <p>
         <a href="https://www.npmjs.com/package/unplugin-flag">
@@ -30,12 +30,15 @@
 * [📦 Installation](installation)
 * [🚀 Basic Usage](#basic-usage)
     * [1. Configuration](#configuration)
-    * [2. Flag your code](#accessing-environment-variables)
+    * [2. Flag your code](#flag-your-code)
     * [3. Done](#)
 * [💡 Acknowledgements](#acknowledgements)
 
 ## Features
 
+* ✍️ **Type-Safe**: Automatically inferred types based on your feature flag configuration.
+* ⚡ **Developer-Friendly**: Lightweight and simple API for managing feature flag.
+* **💀 Dead Code Elimination**: Removed unused code flag. 
 
 ## Installation
 
@@ -63,11 +66,11 @@ pnpm add unplugin-flag          # pnpm
 
 ```ts
 // next.config.mjs
-import Environment from 'unplugin-flag/webpack'
+import Flag from 'unplugin-flag/webpack'
 
 const nextConfig = {
     webpack(config){
-        config.plugins.push(Environment('PREFIX_APP'))
+        config.plugins.push(Flag('PREFIX_APP'))
         return config
     },
 }
@@ -86,11 +89,11 @@ export default nextConfig
 
 ```ts
 // vite.config.ts
-import Environment from 'unplugin-flag/vite'
+import Flag from 'unplugin-flag/vite'
 
 export default defineConfig({
   plugins: [
-    Environment('PREFIX_APP'),
+    Flag('PREFIX_APP'),
   ],
 })
 ```
@@ -105,11 +108,11 @@ export default defineConfig({
 
 ```ts
 // farm.config.ts
-import Environment from 'unplugin-flag/farm'
+import Flag from 'unplugin-flag/farm'
 
 export default defineconfig({
   plugins: [
-    Environment('PREFIX_APP'),
+    Flag('PREFIX_APP'),
   ],
 })
 ```
@@ -143,11 +146,11 @@ module.exports = {
 
 ```ts
 // rollup.config.js
-import Environment from 'unplugin-flag/rollup'
+import Flag from 'unplugin-flag/rollup'
 
 export default {
   plugins: [
-    Environment('PREFIX_APP'),
+    Flag('PREFIX_APP'),
   ],
 }
 ```
@@ -164,11 +167,11 @@ export default {
 
 ```ts
 // rolldown.config.js
-import Environment from 'unplugin-flag/rolldown'
+import Flag from 'unplugin-flag/rolldown'
 
 export default {
   plugins: [
-    Environment('PREFIX_APP'),
+    Flag('PREFIX_APP'),
   ],
 }
 ```
@@ -205,10 +208,10 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
-import Environment from 'unplugin-flag/esbuild'
+import Flag from 'unplugin-flag/esbuild'
 
 build({
-  plugins: [Environment('PREFIX_APP')],
+  plugins: [Flag('PREFIX_APP')],
 })
 ```
 
@@ -224,10 +227,10 @@ build({
 ```ts
 // astro.config.mjs
 import { defineConfig } from 'astro/config'
-import Environment from 'unplugin-flag/astro'
+import Flag from 'unplugin-flag/astro'
 
 build({
-  plugins: [Environment('PREFIX_APP')],
+  plugins: [Flag('PREFIX_APP')],
 })
 ```
 
@@ -236,24 +239,6 @@ build({
 </div>
 
 <br></details>
-
-#### Schema Validation
-
-Use the `schema` option with [zod](https://github.com/colinhacks/zod_) for validating environment variables. This automatically creates a virtual module with types.
-
-
-```ts
-Environment({
-    match: 'PREFIX_', // or ['PREFIX_', 'PREFIX2_']
-    schema: {
-        PREFIX_APP_NAME: z.string().min(1).default('My App'),
-        PREFIX_APP_PORT: z.coerce.number().min(1).default(3000),
-    },
-})
-```
-<div align="right">
-    <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
-</div>
 
 #### Intellisense with TypeScript
 To enable Intellisense for environment variables, add the following to your `tsconfig.json`:
@@ -269,111 +254,30 @@ To enable Intellisense for environment variables, add the following to your `tsc
     <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
 </div>
 
-### Accessing Environment Variables
-
-You can access environment variables from the virtual module `@env`:
-
-```typescript
-import { env } from '@env'
-
-console.log(env.PREFIX_APP_NAME)
-```
-
-If you want to customize the module name, use the `moduleEnvName` option:
-
-```typescript
-// in plugin configuration
-Environment({
-    match: 'PREFIX_', // or ['PREFIX_', 'PREFIX2_']
-    schema: ...,
-    moduleEnvName: 'MYENV',
-})
-
-
-// you can access it from `MYENV` module
-import { env } from 'MYENV'
-
-console.log(env.PREFIX_APP_NAME)
-```
-
-<div align="right">
-    <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
-</div>
-
-### Client/Server Environment
-
-To handle environment variables separately for client and server, use the client and server options. This allows for precise control over which variables are accessible in different environments.
-
-> [!NOTE]
-> When using the client and server options, you cannot access environment variables through the @env module. Instead, use `@env/client` for client-side variables and `@env/server` for server-side variables by default.
-
-Example configuration:
-```ts
-Environment({
-    client: {
-        match: 'CLIENT_',
-        schema: {
-            CLIENT_APP_NAME: z.string().min(1).default('My App'),
-        },
-    },
-    server: {
-        match: 'SERVER_',
-        schema: {
-            SERVER_APP_DB_URL: z.string().min(1).default('postgres://localhost:5432/mydb'),
-        }
-    },
-})
-```
-
-If you'd like to change the default module names `@env/client` and `@env/server`, you can use the optional `moduleEnvName` key to define a custom module name for accessing the environment variables.
-
-> [!CAUTION]
-> When customizing moduleEnvName for client and server, ensure the module names are different. Using the same name for both client and server can cause conflicts and unpredictable behavior.
+### Flag your code
 
 ```ts
-Environment({
-    client: {
-        match: 'CLIENT_',
-        schema: {
-            CLIENT_APP_NAME: z.string().min(1).default('My App'),
-        },
-        moduleEnvName: '@myenv/client', // Optional: Customize the client module name
-    },
-    server: {
-        match: 'SERVER_',
-        schema: {
-            SERVER_APP_DB_URL: z.string().min(1).default('postgres://localhost:5432/mydb'),
-        },
-        moduleEnvName: '@myenv/server', // Optional: Customize the server module name
-    },
-})
+import { flag } from '@flag'
+
+const someFeature = flag.MY_FEATURE("show me when true", "show me when false")
 ```
 
-#### Accessing Client/Server Environment
+Result
+```diff
+// when true
+-- const someFeature = flag.MY_FEATURE("show me when true", "show me when false")
+++ const someFeature = "show me when true"
 
-```ts
-// client environment
-import { env } from '@env/client'
-
-env.CLIENT_APP_NAME // typed with string
-
-// server environment
-import { env } from '@env/server'
-
-env.SERVER_APP_DB_URL // typed with string
-
+// when false
+-- const someFeature = flag.MY_FEATURE("show me when true", "show me when false")
+++ const someFeature = "show me when false"
 ```
-
 
 <div align="right">
     <a href="#table-of-contents"><strong>⇡ <i>Back to top</i></strong></a>
 </div>
 
 ## Acknowledgements
-
-* [dotenv](https://github.com/motdotla/dotenv) 
-* [t3-env](https://github.com/t3-oss/t3-env) 
-* [vite-plugin-environment](https://github.com/ElMassimo/vite-plugin-environment)
 
 <hr/>
 
