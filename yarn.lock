@@ -4315,21 +4315,21 @@ __metadata:
   linkType: hard
 
 "bumpp@npm:^9.2.0":
-  version: 9.7.1
-  resolution: "bumpp@npm:9.7.1"
+  version: 9.8.0
+  resolution: "bumpp@npm:9.8.0"
   dependencies:
     "@jsdevtools/ez-spawn": "npm:^3.0.4"
     c12: "npm:^1.11.2"
     cac: "npm:^6.7.14"
     escalade: "npm:^3.2.0"
-    fast-glob: "npm:^3.3.2"
     js-yaml: "npm:^4.1.0"
     jsonc-parser: "npm:^3.3.1"
     prompts: "npm:^2.4.2"
     semver: "npm:^7.6.3"
+    tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10c0/aa8f6ea6c3cec1f40cf1f8a8061d16a106074dca963c6d6bc01f56e0e97895ead812eab3b355e60ba3c8b13b656112eaaec0094c7937e945b57935fc43497558
+  checksum: 10c0/63ba3d6c8d3f5c526c99c7eaa79d87a7cabbacb272f3b40c9a71ea9e0e103bee23482751fd5c917e585b3811e39c751f819f64bb4b464e6858ccebc042531219
   languageName: node
   linkType: hard
 
@@ -13165,7 +13165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.9":
+"tinyglobby@npm:^0.2.10, tinyglobby@npm:^0.2.9":
   version: 0.2.10
   resolution: "tinyglobby@npm:0.2.10"
   dependencies:
