@@ -16,8 +16,8 @@ __metadata:
   linkType: hard
 
 "@anolilab/multi-semantic-release@npm:^1.1.3":
-  version: 1.1.4
-  resolution: "@anolilab/multi-semantic-release@npm:1.1.4"
+  version: 1.1.5
+  resolution: "@anolilab/multi-semantic-release@npm:1.1.5"
   dependencies:
     "@semrel-extra/topo": "npm:^1.14.1"
     blork: "npm:^9.3.0"
@@ -25,7 +25,7 @@ __metadata:
     debug: "npm:^4.3.7"
     detect-indent: "npm:^7.0.1"
     detect-newline: "npm:^4.0.1"
-    execa: "npm:^9.4.1"
+    execa: "npm:^9.5.1"
     git-log-parser: "npm:^1.2.1"
     lodash-es: "npm:^4.17.21"
     resolve-from: "npm:^5.0.0"
@@ -6340,9 +6340,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^9.4.1":
-  version: 9.5.0
-  resolution: "execa@npm:9.5.0"
+"execa@npm:^9.5.1":
+  version: 9.5.1
+  resolution: "execa@npm:9.5.1"
   dependencies:
     "@sindresorhus/merge-streams": "npm:^4.0.0"
     cross-spawn: "npm:^7.0.3"
@@ -6356,7 +6356,7 @@ __metadata:
     signal-exit: "npm:^4.1.0"
     strip-final-newline: "npm:^4.0.0"
     yoctocolors: "npm:^2.0.0"
-  checksum: 10c0/93bc077249a778accc019bce141e0ebdf85e1a19ea02eaa1ed00cb49436b0751a7983fee0c0d95434e81727808639c512eea8d1308104598859cac2f01336bb1
+  checksum: 10c0/1a628d535c5a088f9e17a735bb3143efc4198095392b319ba877b2975d5c3c57724536dccb6f68f1cd9b3af331c5a9e8c1aeb338d52ab316b1e008ff453374a7
   languageName: node
   linkType: hard
 
