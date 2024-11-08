@@ -4327,8 +4327,8 @@ __metadata:
   linkType: hard
 
 "bumpp@npm:^9.2.0":
-  version: 9.8.0
-  resolution: "bumpp@npm:9.8.0"
+  version: 9.8.1
+  resolution: "bumpp@npm:9.8.1"
   dependencies:
     "@jsdevtools/ez-spawn": "npm:^3.0.4"
     c12: "npm:^1.11.2"
@@ -4341,7 +4341,7 @@ __metadata:
     tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10c0/63ba3d6c8d3f5c526c99c7eaa79d87a7cabbacb272f3b40c9a71ea9e0e103bee23482751fd5c917e585b3811e39c751f819f64bb4b464e6858ccebc042531219
+  checksum: 10c0/f7952d92f50ac84ff9473696862e6dda6e500e0721e728bdc47c36c059e115a55d116fbe4fbab691210d65b6b5684784ccbb9e2f00c5614c43136617571ec491
   languageName: node
   linkType: hard
 
