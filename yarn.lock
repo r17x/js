@@ -1502,85 +1502,85 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@farmfe/core-darwin-arm64@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-darwin-arm64@npm:1.4.5"
+"@farmfe/core-darwin-arm64@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-darwin-arm64@npm:1.5.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-darwin-x64@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-darwin-x64@npm:1.4.5"
+"@farmfe/core-darwin-x64@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-darwin-x64@npm:1.5.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-arm64-gnu@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-linux-arm64-gnu@npm:1.4.5"
+"@farmfe/core-linux-arm64-gnu@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-linux-arm64-gnu@npm:1.5.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-arm64-musl@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-linux-arm64-musl@npm:1.4.5"
+"@farmfe/core-linux-arm64-musl@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-linux-arm64-musl@npm:1.5.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-x64-gnu@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-linux-x64-gnu@npm:1.4.5"
+"@farmfe/core-linux-x64-gnu@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-linux-x64-gnu@npm:1.5.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-x64-musl@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-linux-x64-musl@npm:1.4.5"
+"@farmfe/core-linux-x64-musl@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-linux-x64-musl@npm:1.5.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@farmfe/core-win32-arm64-msvc@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-win32-arm64-msvc@npm:1.4.5"
+"@farmfe/core-win32-arm64-msvc@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-win32-arm64-msvc@npm:1.5.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-win32-ia32-msvc@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-win32-ia32-msvc@npm:1.4.5"
+"@farmfe/core-win32-ia32-msvc@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-win32-ia32-msvc@npm:1.5.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@farmfe/core-win32-x64-msvc@npm:1.4.5":
-  version: 1.4.5
-  resolution: "@farmfe/core-win32-x64-msvc@npm:1.4.5"
+"@farmfe/core-win32-x64-msvc@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@farmfe/core-win32-x64-msvc@npm:1.5.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
 "@farmfe/core@npm:^1.2.0":
-  version: 1.4.5
-  resolution: "@farmfe/core@npm:1.4.5"
+  version: 1.5.0
+  resolution: "@farmfe/core@npm:1.5.0"
   dependencies:
-    "@farmfe/core-darwin-arm64": "npm:1.4.5"
-    "@farmfe/core-darwin-x64": "npm:1.4.5"
-    "@farmfe/core-linux-arm64-gnu": "npm:1.4.5"
-    "@farmfe/core-linux-arm64-musl": "npm:1.4.5"
-    "@farmfe/core-linux-x64-gnu": "npm:1.4.5"
-    "@farmfe/core-linux-x64-musl": "npm:1.4.5"
-    "@farmfe/core-win32-arm64-msvc": "npm:1.4.5"
-    "@farmfe/core-win32-ia32-msvc": "npm:1.4.5"
-    "@farmfe/core-win32-x64-msvc": "npm:1.4.5"
-    "@farmfe/runtime": "npm:0.12.9"
-    "@farmfe/runtime-plugin-hmr": "npm:3.5.7"
-    "@farmfe/runtime-plugin-import-meta": "npm:0.2.2"
+    "@farmfe/core-darwin-arm64": "npm:1.5.0"
+    "@farmfe/core-darwin-x64": "npm:1.5.0"
+    "@farmfe/core-linux-arm64-gnu": "npm:1.5.0"
+    "@farmfe/core-linux-arm64-musl": "npm:1.5.0"
+    "@farmfe/core-linux-x64-gnu": "npm:1.5.0"
+    "@farmfe/core-linux-x64-musl": "npm:1.5.0"
+    "@farmfe/core-win32-arm64-msvc": "npm:1.5.0"
+    "@farmfe/core-win32-ia32-msvc": "npm:1.5.0"
+    "@farmfe/core-win32-x64-msvc": "npm:1.5.0"
+    "@farmfe/runtime": "npm:0.12.10"
+    "@farmfe/runtime-plugin-hmr": "npm:3.5.10"
+    "@farmfe/runtime-plugin-import-meta": "npm:0.2.3"
     "@farmfe/utils": "npm:0.1.0"
     "@koa/cors": "npm:^5.0.0"
     "@swc/helpers": "npm:^0.5.0"
@@ -1589,7 +1589,7 @@ __metadata:
     dotenv: "npm:^16.4.5"
     dotenv-expand: "npm:^11.0.6"
     execa: "npm:^7.1.1"
-    farm-browserslist-generator: "npm:^1.0.0"
+    farm-browserslist-generator: "npm:1.0.5"
     farm-plugin-replace-dirname: "npm:0.2.1"
     fast-glob: "npm:^3.3.2"
     fs-extra: "npm:^11.1.1"
@@ -1624,34 +1624,34 @@ __metadata:
       optional: true
     "@farmfe/core-win32-x64-msvc":
       optional: true
-  checksum: 10c0/3f532ab64a9d93c8ec74a4e5f68b3a88556eb2e43cd5384e0496bf98470e58b4048ed2e06ce01ca3f74337d4329c20e21e4cae7c0fbcc0e3ebcbeb01d34b725e
+  checksum: 10c0/5e41d82d2888cca2c8a52c638af601560c2eda8ce3b5480d87f5eb876f627f03fcf20779a4633219d37b9226a108e144b1caf6ba5fbab2377593ab6bdd66f9b1
   languageName: node
   linkType: hard
 
-"@farmfe/runtime-plugin-hmr@npm:3.5.7":
-  version: 3.5.7
-  resolution: "@farmfe/runtime-plugin-hmr@npm:3.5.7"
+"@farmfe/runtime-plugin-hmr@npm:3.5.10":
+  version: 3.5.10
+  resolution: "@farmfe/runtime-plugin-hmr@npm:3.5.10"
   dependencies:
     core-js: "npm:^3.30.1"
-  checksum: 10c0/78ae20872e3fa9f5b576d4807d6ae1c1e75b562f2f857f924125dd7dd4a928024cf2b65a423b246b93ba8c8e7700bbdec3bdfdeefeeda5f8e198ff1dc88347ce
+  checksum: 10c0/1d99114121d67d67016f0f2f76a4ea8fc9beaeedfe62c10baaf3768a8ed630c11338a463dc8ce8e26b602682ba30201349a9c1029d0a1151bdac70963f96b44b
   languageName: node
   linkType: hard
 
-"@farmfe/runtime-plugin-import-meta@npm:0.2.2":
-  version: 0.2.2
-  resolution: "@farmfe/runtime-plugin-import-meta@npm:0.2.2"
+"@farmfe/runtime-plugin-import-meta@npm:0.2.3":
+  version: 0.2.3
+  resolution: "@farmfe/runtime-plugin-import-meta@npm:0.2.3"
   dependencies:
     core-js: "npm:^3.30.1"
-  checksum: 10c0/0ecc70567865a71f995ce38909b070a792513a61fdab14b216bea55dba14c3964c2d3bb403b0c6705fe943f85e7684600d4a88cb60f0dcfdd6392a1a5b9dd581
+  checksum: 10c0/86160327b6efe190b52a9a92edc9119ecb90a2a1f0af2dad77c36ca9ea088ba7e1921d8a26a9c63bf6bae056b1aeeef38ed6ad64f558eab7cbf62863c9605a99
   languageName: node
   linkType: hard
 
-"@farmfe/runtime@npm:0.12.9":
-  version: 0.12.9
-  resolution: "@farmfe/runtime@npm:0.12.9"
+"@farmfe/runtime@npm:0.12.10":
+  version: 0.12.10
+  resolution: "@farmfe/runtime@npm:0.12.10"
   dependencies:
     core-js: "npm:^3.30.1"
-  checksum: 10c0/110bbc717898453bf09a38ca7e85676fe5125a7bd2533a1c3e7899f0ac7847b9e1d1b9564c9f45c4d13ece095d6545cbd2ea2e1b7aec036227db304bb4135cbe
+  checksum: 10c0/70266717b14343a3da4e70b46b08d02ffe393b0f16808c874528514b8baba12a81b854292a6e99374fa3072dafd97b6aa9de8620331345af774fcb2d3196e795
   languageName: node
   linkType: hard
 
@@ -4491,7 +4491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001632, caniuse-lite@npm:^1.0.30001646":
+"caniuse-lite@npm:^1.0.30001646":
   version: 1.0.30001663
   resolution: "caniuse-lite@npm:1.0.30001663"
   checksum: 10c0/6508e27bf7fdec657f26f318b1ab64ace6e1208ef9fedaf0975bc89046e0c683bfba837f108840ada1686ff09b8ffd01e05ac791dcf598b8f16eefb636875cf2
@@ -4502,6 +4502,13 @@ __metadata:
   version: 1.0.30001667
   resolution: "caniuse-lite@npm:1.0.30001667"
   checksum: 10c0/6bc8555a47603e1e76eaef9b185d6fdeeca7d9c20a283f7c32c971eb1b52ea3a80e6ec086920f088f06abe619240f1023a2d3a08b5b1f2f11df1475695e9f71c
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001666":
+  version: 1.0.30001689
+  resolution: "caniuse-lite@npm:1.0.30001689"
+  checksum: 10c0/51cf99751dddfba24e13556ae0e0f38c062f76d49f2e24cce3d28e71a0325ca6fe04fe51b4a0e8467d601d94e72fea84f160bf577e7cbb5677f14ac673b6da20
   languageName: node
   linkType: hard
 
@@ -6429,21 +6436,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"farm-browserslist-generator@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "farm-browserslist-generator@npm:1.0.0"
+"farm-browserslist-generator@npm:1.0.5":
+  version: 1.0.5
+  resolution: "farm-browserslist-generator@npm:1.0.5"
   dependencies:
     "@mdn/browser-compat-data": "npm:^5.3.7"
     "@types/object-path": "npm:^0.11.1"
     "@types/semver": "npm:^7.5.0"
     "@types/ua-parser-js": "npm:^0.7.36"
     browserslist: "npm:^4.21.10"
-    caniuse-lite: "npm:^1.0.30001632"
+    caniuse-lite: "npm:^1.0.30001666"
     isbot: "npm:^3.6.13"
     object-path: "npm:^0.11.8"
     semver: "npm:^7.5.4"
     ua-parser-js: "npm:^1.0.35"
-  checksum: 10c0/ad30927bf28509e9aee3f44f64566a07f3aeb983e48f3cd45f6ff04fee7972ed45ee16703ac245ac7ba91832d83d5667c16e7e6acda76f2046cc860934881167
+  checksum: 10c0/bf25c48cfc5851d01fd50eddbf4a3808b46205f78b67678ea2907c14aaafb02a73e4cef093e318630fb92ff33e9d1e25a1c753f610a9f31fb767339255b98710
   languageName: node
   linkType: hard
 
