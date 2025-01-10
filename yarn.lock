@@ -4322,21 +4322,22 @@ __metadata:
   linkType: hard
 
 "bumpp@npm:^9.2.0":
-  version: 9.9.3
-  resolution: "bumpp@npm:9.9.3"
+  version: 9.10.0
+  resolution: "bumpp@npm:9.10.0"
   dependencies:
     c12: "npm:^2.0.1"
     cac: "npm:^6.7.14"
     escalade: "npm:^3.2.0"
     js-yaml: "npm:^4.1.0"
     jsonc-parser: "npm:^3.3.1"
+    package-manager-detector: "npm:^0.2.8"
     prompts: "npm:^2.4.2"
     semver: "npm:^7.6.3"
     tinyexec: "npm:^0.3.2"
     tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10c0/c412c5bda8e434f768063e6013f2eae86817aeb7082d683b6b9888e62ed534292453e9f76cd00467fbc2db7045d98a4ed53d521a6f78f63b00266d3f7487e722
+  checksum: 10c0/5064be16407f202b0641ba6f12c1ba74a27aeae1e9e3983f5d3b80c890ba6cbbf860bd1af26d20d0465acfd547432a97caf820f4f012da957ba11407167dbac7
   languageName: node
   linkType: hard
 
@@ -10867,6 +10868,13 @@ __metadata:
   version: 0.2.0
   resolution: "package-manager-detector@npm:0.2.0"
   checksum: 10c0/1ad699098018f9425b0f0a197537e085420ebcb7b6c49ef5a8dcff198f50d8de206f52ed10867624b7cb01bebac76396f5ac020dcff96f44154d59e6a5dcf36a
+  languageName: node
+  linkType: hard
+
+"package-manager-detector@npm:^0.2.8":
+  version: 0.2.8
+  resolution: "package-manager-detector@npm:0.2.8"
+  checksum: 10c0/2d24dd6e50a196a0b1e3ce7bf6db8aff403bdbe333cf81383bec54fa441dac958ec87a7e6865cf86e614704f349c7effaf8d0c2474a6a50a164e6218689f02db
   languageName: node
   linkType: hard
 
