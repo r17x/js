@@ -4322,8 +4322,8 @@ __metadata:
   linkType: hard
 
 "bumpp@npm:^9.2.0":
-  version: 9.10.0
-  resolution: "bumpp@npm:9.10.0"
+  version: 9.10.1
+  resolution: "bumpp@npm:9.10.1"
   dependencies:
     c12: "npm:^2.0.1"
     cac: "npm:^6.7.14"
@@ -4337,7 +4337,7 @@ __metadata:
     tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10c0/5064be16407f202b0641ba6f12c1ba74a27aeae1e9e3983f5d3b80c890ba6cbbf860bd1af26d20d0465acfd547432a97caf820f4f012da957ba11407167dbac7
+  checksum: 10c0/7e69d98d269022b884ae376f371bee416201a038e88f88ca596deb9e3e628873f7ead693d95faeb48cd35ce05fdbd4035e715e409317f05d085b2fcc8cf48dfd
   languageName: node
   linkType: hard
 
