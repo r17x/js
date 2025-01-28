@@ -4335,8 +4335,8 @@ __metadata:
   linkType: hard
 
 "bumpp@npm:^9.2.0":
-  version: 9.10.2
-  resolution: "bumpp@npm:9.10.2"
+  version: 9.11.1
+  resolution: "bumpp@npm:9.11.1"
   dependencies:
     c12: "npm:^2.0.1"
     cac: "npm:^6.7.14"
@@ -4346,11 +4346,12 @@ __metadata:
     package-manager-detector: "npm:^0.2.8"
     prompts: "npm:^2.4.2"
     semver: "npm:^7.6.3"
+    tiny-conventional-commits-parser: "npm:^0.0.1"
     tinyexec: "npm:^0.3.2"
     tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10c0/bfc618ae57efbe68eb6f3691cc6d472152beb3edff6f9bb0b6c9fd1a60acff3327cea884aafb68fdb7c53462c7f116346594d86b43a6913375fa1a47b384c0bb
+  checksum: 10c0/d8f228b280a7092c0b6f7b692dfe132c31225339332376b695b07815ea1a6a53880e69a1f6c507b6e70301d39916ee95622eb99e1d91a9427532e7444f41ea17
   languageName: node
   linkType: hard
 
@@ -13264,6 +13265,13 @@ __metadata:
   dependencies:
     convert-hrtime: "npm:^5.0.0"
   checksum: 10c0/37b8284c53f4ee320377512ac19e3a034f2b025f5abd6959b8c1d0f69e0f06ab03681df209f2e452d30129e7b1f25bf573fb0f29d57e71f9b4a6b5b99f4c4b9e
+  languageName: node
+  linkType: hard
+
+"tiny-conventional-commits-parser@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "tiny-conventional-commits-parser@npm:0.0.1"
+  checksum: 10c0/dc4177eaf7461acc76344bba8be861750c834f84e54bf76e8c667360652f8d107f6b099a93dfcc1a1399904cf4228c04d86852ded187f6b0229f15897ee00182
   languageName: node
   linkType: hard
 
