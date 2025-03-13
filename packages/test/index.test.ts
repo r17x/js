@@ -77,7 +77,7 @@ const expectations = {
 	esbuild: {
 		bundler: "esbuild",
 		index: 0,
-		bundlerModuleName: "unplugin-environment:@env",
+		bundlerModuleName: "@env",
 	},
 	farm: {
 		bundler: "farm",
@@ -115,7 +115,7 @@ const expectationsClient = {
 	esbuild: {
 		bundler: "esbuild",
 		index: 0,
-		bundlerModuleName: "unplugin-environment:@env/client",
+		bundlerModuleName: "@env/client",
 	},
 	farm: {
 		bundler: "farm",
@@ -153,7 +153,7 @@ const expectationsServer = {
 	esbuild: {
 		bundler: "esbuild",
 		index: 0,
-		bundlerModuleName: "unplugin-environment:@env/server",
+		bundlerModuleName: "@env/server",
 	},
 	farm: {
 		bundler: "farm",
