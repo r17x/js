@@ -16,8 +16,8 @@ __metadata:
   linkType: hard
 
 "@anolilab/multi-semantic-release@npm:^1.1.3":
-  version: 1.1.10
-  resolution: "@anolilab/multi-semantic-release@npm:1.1.10"
+  version: 1.1.11
+  resolution: "@anolilab/multi-semantic-release@npm:1.1.11"
   dependencies:
     "@semrel-extra/topo": "npm:^1.14.1"
     blork: "npm:^9.3.0"
