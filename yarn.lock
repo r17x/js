@@ -1528,8 +1528,8 @@ __metadata:
   linkType: hard
 
 "@farmfe/cli@npm:^1.0.2":
-  version: 1.0.4
-  resolution: "@farmfe/cli@npm:1.0.4"
+  version: 1.0.5
+  resolution: "@farmfe/cli@npm:1.0.5"
   dependencies:
     cac: "npm:^6.7.14"
     cross-spawn: "npm:^7.0.3"
@@ -1537,7 +1537,7 @@ __metadata:
     walkdir: "npm:^0.4.1"
   bin:
     farm: bin/farm.mjs
-  checksum: 10c0/c9e42d9cc844277fe60b70c6dea2ea52ebf464f037973ce7c85f38994c2a383d254bb561416a664a85cf5d95aad6c5a01ab262aec0aab9108beefdc01337c654
+  checksum: 10c0/24383bd156c052bd5538b698980be564ae55c6211fcdb73c18c1036274c8c0ba45b6ddb5d03f9d5089112fd03bb3e34dd7483340d8c20c3d15710d69c23af532
   languageName: node
   linkType: hard
 
