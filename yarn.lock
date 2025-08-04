@@ -1569,82 +1569,82 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@farmfe/core-darwin-arm64@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-darwin-arm64@npm:1.7.8"
+"@farmfe/core-darwin-arm64@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-darwin-arm64@npm:1.7.11"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-darwin-x64@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-darwin-x64@npm:1.7.8"
+"@farmfe/core-darwin-x64@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-darwin-x64@npm:1.7.11"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-arm64-gnu@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-linux-arm64-gnu@npm:1.7.8"
+"@farmfe/core-linux-arm64-gnu@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-linux-arm64-gnu@npm:1.7.11"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-arm64-musl@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-linux-arm64-musl@npm:1.7.8"
+"@farmfe/core-linux-arm64-musl@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-linux-arm64-musl@npm:1.7.11"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-x64-gnu@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-linux-x64-gnu@npm:1.7.8"
+"@farmfe/core-linux-x64-gnu@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-linux-x64-gnu@npm:1.7.11"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@farmfe/core-linux-x64-musl@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-linux-x64-musl@npm:1.7.8"
+"@farmfe/core-linux-x64-musl@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-linux-x64-musl@npm:1.7.11"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@farmfe/core-win32-arm64-msvc@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-win32-arm64-msvc@npm:1.7.8"
+"@farmfe/core-win32-arm64-msvc@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-win32-arm64-msvc@npm:1.7.11"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@farmfe/core-win32-ia32-msvc@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-win32-ia32-msvc@npm:1.7.8"
+"@farmfe/core-win32-ia32-msvc@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-win32-ia32-msvc@npm:1.7.11"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@farmfe/core-win32-x64-msvc@npm:1.7.8":
-  version: 1.7.8
-  resolution: "@farmfe/core-win32-x64-msvc@npm:1.7.8"
+"@farmfe/core-win32-x64-msvc@npm:1.7.11":
+  version: 1.7.11
+  resolution: "@farmfe/core-win32-x64-msvc@npm:1.7.11"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
 "@farmfe/core@npm:^1.2.0":
-  version: 1.7.8
-  resolution: "@farmfe/core@npm:1.7.8"
+  version: 1.7.11
+  resolution: "@farmfe/core@npm:1.7.11"
   dependencies:
-    "@farmfe/core-darwin-arm64": "npm:1.7.8"
-    "@farmfe/core-darwin-x64": "npm:1.7.8"
-    "@farmfe/core-linux-arm64-gnu": "npm:1.7.8"
-    "@farmfe/core-linux-arm64-musl": "npm:1.7.8"
-    "@farmfe/core-linux-x64-gnu": "npm:1.7.8"
-    "@farmfe/core-linux-x64-musl": "npm:1.7.8"
-    "@farmfe/core-win32-arm64-msvc": "npm:1.7.8"
-    "@farmfe/core-win32-ia32-msvc": "npm:1.7.8"
-    "@farmfe/core-win32-x64-msvc": "npm:1.7.8"
+    "@farmfe/core-darwin-arm64": "npm:1.7.11"
+    "@farmfe/core-darwin-x64": "npm:1.7.11"
+    "@farmfe/core-linux-arm64-gnu": "npm:1.7.11"
+    "@farmfe/core-linux-arm64-musl": "npm:1.7.11"
+    "@farmfe/core-linux-x64-gnu": "npm:1.7.11"
+    "@farmfe/core-linux-x64-musl": "npm:1.7.11"
+    "@farmfe/core-win32-arm64-msvc": "npm:1.7.11"
+    "@farmfe/core-win32-ia32-msvc": "npm:1.7.11"
+    "@farmfe/core-win32-x64-msvc": "npm:1.7.11"
     "@farmfe/runtime": "npm:0.12.10"
     "@farmfe/runtime-plugin-hmr": "npm:3.5.10"
     "@farmfe/runtime-plugin-import-meta": "npm:0.2.3"
@@ -1691,7 +1691,7 @@ __metadata:
       optional: true
     "@farmfe/core-win32-x64-msvc":
       optional: true
-  checksum: 10c0/18a9a8d83d4f97819f073982613812f3122296bf9e76a777605ba2d4963211dc1ad8373de3580b32c34bb3e0741240394b7b49915b20d9c27567a59dfe5f1015
+  checksum: 10c0/8e537aa14bc959e35a4b1909e5cec0c056e0b34144ac6fb39ee82cabf6bf7b4899b7fb67f9d9caa815a5d2afdb0722484be8384381edf59d46f22bd8fb45474f
   languageName: node
   linkType: hard
 
