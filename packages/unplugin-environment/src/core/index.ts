@@ -9,7 +9,7 @@ import { zodToTs } from "zod-to-ts";
 import { name as pkgName, version as pkgVersion } from "../../package.json";
 import { log } from "./logger";
 import type * as CoreType from "./types";
-import { dropHead, exclaim, toJsonString, toNull, toUndefined } from "./utils";
+import { dropHead, exclaim, toJsonString, toNull, toUndefined } from "@utils";
 
 const defaultFactory: CoreType.Data["factory"] = {
 	name: pkgName,
