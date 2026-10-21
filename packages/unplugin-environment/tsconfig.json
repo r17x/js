@@ -1,13 +1,24 @@
 {
-	"compilerOptions": {
-		"target": "es2020",
-		"lib": ["esnext", "DOM"],
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"strict": true,
-		"strictNullChecks": true,
-		"esModuleInterop": true
-	},
-	"exclude": ["dist", "eslint.config.js"]
+  "compilerOptions": {
+    "paths": {
+      "@utils": [
+        "./../shared/utils.ts"
+      ]
+    },
+    "target": "es2020",
+    "lib": [
+      "esnext",
+      "DOM"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "dist",
+    "eslint.config.js"
+  ]
 }

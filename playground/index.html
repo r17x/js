@@ -11,6 +11,7 @@
   <!-- [Tested in Vite] src/index.res will be compiled to src/index.res.js -->
   <script type="module"> 
     import "./src/index.res"
+    import "./src/index.ts"
     import {env} from '@env'
     Object.entries(env).forEach(([key, value]) => {
       console.log({
