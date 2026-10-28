@@ -11495,8 +11495,8 @@ __metadata:
   linkType: hard
 
 "pacote@npm:^19.0.0, pacote@npm:^19.0.1":
-  version: 19.0.2
-  resolution: "pacote@npm:19.0.2"
+  version: 19.0.3
+  resolution: "pacote@npm:19.0.3"
   dependencies:
     "@npmcli/git": "npm:^6.0.0"
     "@npmcli/installed-package-contents": "npm:^3.0.0"
@@ -11517,7 +11517,7 @@ __metadata:
     tar: "npm:^7.5.10"
   bin:
     pacote: bin/index.js
-  checksum: 10c0/a6b847944d5ef3ad6b36b240e562899c8a7c95d444e5ac08eab222ccb6873d1cfef2f53917f8f2a603fb3f25c62a61ab56dd12c8195c643ced4b82c88789a15a
+  checksum: 10c0/53972e16808cb9d467c5353600bf88a530f96eda0c85dd14f98cbd6182acfafdb11b347c58306c9a3f4ba2daeb3827a0e6ef8a5beba89a235517c8f1ac30052e
   languageName: node
   linkType: hard
 
